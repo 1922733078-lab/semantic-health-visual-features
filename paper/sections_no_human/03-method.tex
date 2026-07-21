@@ -38,7 +38,14 @@ Before held-out analysis, the development split is subjected to four gates:
     \item candidate baseline score vectors are compared pairwise, and identical or reversed rankings ($|\rho|=1$ within $10^{-12}$) are rejected;
     \item each score reports feature $z$-clipping, final-boundary clipping, unique values, and the largest exact-tie fraction by split.
 \end{enumerate}
-These checks are deterministic assertions suitable for automated testing. Passing them establishes computational responsiveness, not construct validity.
+These checks are deterministic assertions suitable for automated testing. Passing them establishes computational responsiveness, not construct validity. Figure~\ref{fig:pipeline_gates} illustrates the four-gate architecture and its position between feature extraction and held-out evaluation.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{fig_pipeline_gates.pdf}
+\caption{Four-layer semantic-health gate pipeline. Each gate operates on the development split before any held-out evaluation. A violation at any layer triggers fail-fast rejection rather than silent propagation.}
+\label{fig:pipeline_gates}
+\end{figure}
 
 \subsection{Legacy formulas under audit}
 \label{sec:proxies}

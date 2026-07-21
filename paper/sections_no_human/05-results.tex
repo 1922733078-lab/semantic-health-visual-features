@@ -3,7 +3,14 @@
 
 \subsection{RQ1: the semantic gates expose a reproducible inactive path}
 
-The pre-fix control is complete, finite, and hash stable, yet all six saliency-dependent fields have one value across the 16,425 Pillow images (the same fallback is input-independent by code inspection and would produce identical constants on any decodable image, including the 1,250 OpenCV images). The repaired extraction returns 16,413 unique map means, 16,409 unique map standard deviations, 12,610 unique salient-area fractions, and 16,425 unique values for each centroid-derived thirds or offset field. All post-fix active weighted features pass the G-dev responsiveness gate; no image is missing and no numeric feature is non-finite.
+Figure~\ref{fig:failure_flow} summarises the detection, repair, and cross-renderer audit sequence. The pre-fix control is complete, finite, and hash stable, yet all six saliency-dependent fields have one value across the 16,425 Pillow images (the same fallback is input-independent by code inspection and would produce identical constants on any decodable image, including the 1,250 OpenCV images).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{fig_failure_flow.pdf}
+\caption{Failure detection, repair, and cross-renderer audit flow. The pre-fix pipeline produced hash-stable but semantically inactive features. Protocol v5 gates detected the defect and quantified its formula-level impact; spectral-residual repair restored responsiveness. Protocol v6 then revealed a distinct score-layer collapse on the second renderer.}
+\label{fig:failure_flow}
+\end{figure} The repaired extraction returns 16,413 unique map means, 16,409 unique map standard deviations, 12,610 unique salient-area fractions, and 16,425 unique values for each centroid-derived thirds or offset field. All post-fix active weighted features pass the G-dev responsiveness gate; no image is missing and no numeric feature is non-finite.
 
 The defect was concentrated but consequential. Table~\ref{tab:semantic_repair} shows that the constant map removed 15\% of the order formula's absolute weight and 45\% of hierarchy's. Replacing only the ten saliency-derived columns raises order's nominal G-test correlation from 0.227 to 0.275 ($\Delta\rho=0.047$) but lowers hierarchy from 0.524 to 0.260 ($\Delta\rho=-0.263$). Complexity, harmony, and intensity do not use an affected field and remain unchanged in the saliency-only comparison. The fully re-extracted pipeline, which also makes k-means deterministic, gives 0.623 for complexity and $-0.098$ for harmony; their differences from the saliency-only control are small.
 
