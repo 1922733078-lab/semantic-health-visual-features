@@ -1,0 +1,54 @@
+# Frozen decision rules for the JVCIR synthetic benchmark.
+# Version: 2.0
+# Strong support requires all three criteria below.
+# No active code or manuscript may override these thresholds without a new protocol version.
+
+association:
+  strong:
+    min_rho: 0.60
+    require_ci_lower_above_zero: true
+    require_q_below: 0.05
+  partial:
+    min_rho: 0.30
+    max_rho_for_partial: 0.60  # exclusive upper bound; at or above 0.60 is candidate for strong
+    require_ci_lower_above_zero: true
+    require_q_below: 0.05
+  failure:
+    description: rho < 0.30, CI includes or below zero, or q >= 0.05
+
+selectivity:
+  strong:
+    min_margin: 0.15  # abs(target_rho) - abs(max_abs_non_target_rho) >= 0.15
+  partial:
+    min_margin_above_zero: true  # margin > 0 but < 0.15
+  failure:
+    description: margin <= 0 or target association is not the strongest
+
+family_generalization:
+  strong:
+    all_held_out_families_meet_association_partial: true
+  partial:
+    some_but_not_all_held_out_families_meet_association_partial: true
+  failure:
+    description: no held-out family meets association_partial, or broad reversal
+
+overall_support_status:
+  strong:
+    - association_strong
+    - selectivity_strong
+    - family_generalization_strong
+  partial:
+    - association_partial
+    - selectivity_margin_above_zero
+    - some_but_not_all_families_partial
+  failure_or_limitation: otherwise
+
+monotonicity:
+  strong: correct_direction_in_all_families
+  partial: correct_direction_in_majority_of_families
+  failure: reversed_or_inconsistent
+
+fdr_correction:
+  method: benjamini_hochberg
+  tests: 25  # 5 proxies x 5 targets
+  alpha: 0.05

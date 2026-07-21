@@ -1,0 +1,119 @@
+{
+  "generator_version": "2.1",
+  "generator_file": "generate_layouts.py",
+  "generator_sha256": "acd8ebaeff81a127693d7c3083ac7147d9e536603a0a0488c01c991b1aa5cc69",
+  "families": {
+    "A_poster": {
+      "display_name": "poster-like",
+      "canvas_size": [
+        768,
+        1024
+      ],
+      "n_primitives_range": [
+        6,
+        14
+      ],
+      "split": "G-dev",
+      "seed_range": [
+        0,
+        9
+      ]
+    },
+    "B_banner": {
+      "display_name": "banner-like",
+      "canvas_size": [
+        1024,
+        384
+      ],
+      "n_primitives_range": [
+        4,
+        10
+      ],
+      "split": "G-validation",
+      "seed_range": [
+        10,
+        14
+      ]
+    },
+    "C_card": {
+      "display_name": "card-like",
+      "canvas_size": [
+        512,
+        768
+      ],
+      "n_primitives_range": [
+        3,
+        8
+      ],
+      "split": "G-test",
+      "seed_range": [
+        15,
+        24
+      ]
+    }
+  },
+  "constructs": {
+    "visual_complexity": {
+      "target": "structural_clutter_index",
+      "parameters": [
+        "n_primitives",
+        "overlap_ratio",
+        "edge_density_factor",
+        "spacing_irregularity",
+        "whitespace_fraction"
+      ],
+      "levels": 5
+    },
+    "layout_order": {
+      "target": "geometric_order_index",
+      "parameters": [
+        "alignment_jitter",
+        "grid_deviation",
+        "spacing_variance",
+        "overlap_ratio"
+      ],
+      "levels": 5
+    },
+    "colour_harmony": {
+      "target": "palette_coherence_index",
+      "parameters": [
+        "hue_dispersion",
+        "chroma_dispersion",
+        "palette_incoherence"
+      ],
+      "levels": 5
+    },
+    "visual_intensity": {
+      "target": "visual_salience_index",
+      "parameters": [
+        "contrast_ratio",
+        "luminance_contrast",
+        "edge_contrast",
+        "focal_contrast"
+      ],
+      "levels": 5
+    },
+    "layout_hierarchy": {
+      "target": "focal_hierarchy_index",
+      "parameters": [
+        "focal_size_ratio",
+        "focal_contrast",
+        "secondary_count",
+        "whitespace_fraction"
+      ],
+      "levels": 5
+    }
+  },
+  "interaction_conditions": [
+    "high_clutter_high_alignment",
+    "low_clutter_high_colour_noise",
+    "strong_hierarchy_large_whitespace",
+    "symmetric_high_edge_density"
+  ],
+  "primitive_types": [
+    "rectangle",
+    "circle"
+  ],
+  "text_elements": "horizontal high-contrast bars (no linguistic content)",
+  "randomness_source": "SHA-256 framed tuple -> first 32 bits -> NumPy PCG64"
+}
