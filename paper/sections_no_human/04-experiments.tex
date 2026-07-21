@@ -1,0 +1,33 @@
+\section{Experiments}
+\label{sec:experiments}
+
+\subsection{Pillow corpus and frozen splits}
+
+The primary corpus contains 15,625 base layouts and 800 interaction layouts ($n=16{,}425$). Its five generator constructs are visual complexity, layout order, colour harmony, visual intensity, and layout hierarchy. One Pillow program renders three styles with a shared primitive vocabulary and target system. G-dev uses poster-like style A and seeds 0--9 ($n=6{,}250$); G-validation uses banner-like style B and seeds 10--14 ($n=3{,}125$); G-test uses card-like style C and seeds 15--24 ($n=6{,}250$). The split is intentionally confounded with style: G-dev, G-validation, and G-test use different rendering styles, so held-out evaluation simultaneously tests formula robustness and style shift. Four interaction conditions contribute 800 additional diagnostic images used only for qualitative inspection of multi-factor interference; they do not enter the primary quantitative analysis. Target computation reads rendering-parameter metadata, whereas the feature program reads image pixels. This path separation prevents direct target-column leakage but not shared causal factors.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.80\textwidth,height=0.72\textheight,keepaspectratio]{benchmark_examples.png}
+\caption{Pillow development examples at the lowest and highest intervention levels. The panels visualise controlled renderer variables, not human perceptual labels.}
+\label{fig:benchmark_examples}
+\end{figure}
+
+\subsection{Pre-fix/post-fix experiment}
+
+The preserved pre-fix feature matrix is bound by SHA-256 before re-extraction. The repaired extractor is then run across all 16,425 images. For the causal pre/post comparison, we construct a hybrid matrix by replacing only the ten saliency-derived columns in the pre-fix matrix; this isolates the fallback repair from the separate deterministic k-means change. The fully re-extracted pipeline is reported as the final implementation and bound by its own input hash. Field-level gates compare the six directly affected active columns, and formula-level analysis compares retained absolute weight and nominal G-test association under the same G-dev-only scaling policy.
+
+\subsection{Development-selected baselines and controls}
+
+Each case subject has three elementary candidates. Complexity candidates are grey entropy, Canny edge fraction, and edge fraction multiplied by non-whitespace area. Order candidates are horizontal symmetry, negative local-contrast CV, and whitespace fraction; the earlier $1-\mathrm{symmetry}$ candidate was removed because it is rank-equivalent to symmetry. Harmony candidates are the internal colour-harmony score, negative colour entropy, and negative saturation-based colourfulness. Intensity candidates are Lab lightness contrast, HSV value spread, and mean saturation. Hierarchy candidates are saliency dispersion, above-mean salient area, and edge fraction. Selection uses G-dev only.
+
+The ridge control uses every finite numeric feature that varies on G-dev. Regularisation is selected on G-validation and both G-test and the second renderer remain held out. Its purpose is to determine whether the available pixel feature space contains recoverable signal; it is not a perceptual predictor or a formal decision gate.
+
+\subsection{Separately implemented OpenCV renderer}
+
+The second renderer does not import the Pillow drawing functions or rendering-parameter metadata. A 125-row finite-field design assigns five levels to clutter, disorder, palette incoherence, salience, and hierarchy with pairwise-orthogonal factor columns. Ten seeds yield 1,250 images. Direct factor levels provide the OpenCV targets. Protocol-v5 G-dev feature constants and score bounds are applied without retuning.
+
+We report every pairing between the five targets and twelve image descriptors: six operational descriptors declared for this retrospective analysis and the six repaired saliency-dependent fields. The operational set comprises Canny edge fraction, multiscale Lab residual entropy, JPEG bytes per pixel at fixed quality, Hasler--Suesstrunk colourfulness \citep{hasler2003colourfulness}, global luminance coefficient of variation, and horizontal mirror similarity. Full crossing tables test whether a nominal response is accompanied by larger non-target responses. For each composite we separately audit the raw weighted sum and the final clipped 0--100 score, because frozen development bounds can collapse an otherwise varying raw score under renderer shift. The second renderer remains internally controlled synthetic evidence, not natural-image or external-team validation.
+
+\subsection{Reproducibility procedure}
+
+Protocol v5 records input hashes, G-dev target and feature constants, score bounds, weighted-feature health, clipping and tie diagnostics, all 25 associations, baseline selection, paired intervals, and ridge controls. Protocol v6 force-renders every OpenCV image, binds caches to complete ordered image hashes, recomputes features and descriptors, and records semantic-health and mechanism-crossing tables. The Tier-B research object includes source, all 17,675 images, manifests, dependency locks, tests, and hash-exact result inventories. A clean-environment run and an intentional stale-payload substitution test are required before promotion.

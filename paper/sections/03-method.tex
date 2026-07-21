@@ -1,0 +1,100 @@
+% sections/03-method.tex
+
+\section{Method}
+\label{sec:method}
+
+The redesigned study is organized into four explicitly separated layers: (A) large-scale proxy development, (B) frozen human validation, (C) human-efficiency analysis, and (D) optional small-sample calibration. This section describes the datasets, proxy targets, features, models, and validation procedures used in each layer.
+
+\subsection{Datasets and Analytical Roles}
+\label{sec:datasets}
+
+Table~\ref{tab:dataset_roles} defines the datasets and their permitted uses. The separation is enforced by the analysis scripts: no model-selection decision uses D-human, and no proxy-development script reports human accuracy.
+
+\begin{table}[htbp]
+\centering
+\caption{Dataset definitions and analytical roles in the Human-Light redesign.}
+\label{tab:dataset_roles}
+\begin{tabular}{@{}lp{5.5cm}p{5.5cm}@{}}
+\toprule
+Dataset & Content & Permitted use \\
+\midrule
+D-proxy & 17,337 images from five categories with computational proxy targets & Feature development, model selection, ablation, robustness \\
+D-proxy-clean & 15,694 images after excluding exact duplicates of D-human images & Training and selecting the frozen primary model \\
+D-human-raw & 30 raters $\times$ 100 images $\times$ 5 dimensions = 15,000 ratings & Reliability and audit \\
+D-human-mean & Mean rating per image and dimension & Frozen validation or split calibration \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The Phase~1 development dataset spans five categories: Painting (6,450), UI (10,386), Packaging (324), Poster (100), and Banner (77). All images are from publicly available academic sources. The Phase~2 human validation dataset contains 100 images (20 per category) rated by 30 participants on five 1--7 Likert dimensions: visual complexity, beauty, order, hierarchy, and emotion.
+
+\subsection{Proxy-Target Construction}
+\label{sec:proxy_targets}
+
+Because large-scale human ratings are unavailable, we use computational proxy targets derived from established design-theory formulas. These targets are \emph{not} treated as human ground truth; they provide weak supervision for feature engineering and model selection. The formulas combine color, edge, composition, and texture cues into 1--7 scores for each dimension. A full specification, including source publications, input information, and known limitations, is provided in the supplementary data documentation.
+
+\subsection{Handcrafted Visual Design Features}
+\label{sec:features}
+
+All primary experiments use a frozen set of 30 core handcrafted features grounded in design theory. They are organized into five groups:
+
+\begin{itemize}
+    \item \textbf{Color (10):} num\_dominant\_colors, hue\_mean, saturation\_mean, saturation\_std, value\_mean, value\_std, lightness\_contrast, color\_entropy, warm\_color\_ratio, hue\_contrast, color\_harmony.
+    \item \textbf{Texture and edge (5):} edge\_density, edge\_orientation\_entropy, gray\_mean, gray\_std, gray\_entropy.
+    \item \textbf{Composition (7):} symmetry, rule\_of\_thirds, center\_offset\_x, center\_offset\_y, whitespace\_ratio, fg\_bg\_ratio, diagonal\_energy\_ratio.
+    \item \textbf{Layout/OCR (4):} text\_coverage, text\_block\_count, font\_size\_cv, has\_text.
+    \item \textbf{Saliency (2):} saliency\_mean, saliency\_std.
+\end{itemize}
+
+The 14 specialized beauty/order features described in earlier work are retained only as a sensitivity analysis because the enhanced feature matrix covers only 160 images and cannot evaluate all 100 human-rated images.
+
+All images are resized to a minimum edge of 512\,px while preserving aspect ratio, then center-cropped to $512 \times 512$. Conversions use the sRGB color space. Feature extraction is deterministic under the frozen software environment.
+
+\subsection{Proxy-Model Selection}
+\label{sec:model_selection}
+
+Candidate models are evaluated with group-aware, category-stratified cross-validation on D-proxy-clean. The candidates include a global-mean baseline, a category-mean baseline, Ridge regression with $\alpha \in \{0.1, 1, 10\}$, Random Forest, and Gradient Boosting. The model with the best overall proxy-task $R^2$ is selected and its full pipeline (scaler + Ridge) is saved as the frozen primary model before any human validation result is inspected. The selected primary model uses Ridge with $\alpha = 10$.
+
+\subsection{Human-Rating Protocol and Ethics}
+\label{sec:human_protocol}
+
+Thirty participants rated all 100 images on the five dimensions using a 1--7 Likert scale with Chinese anchors. Eligibility, recruitment channel, consent text, anonymization, and withdrawal procedures are documented in the ethics record. The institutional ethics determination and consent documentation are being finalized; the manuscript reports only anonymized rating data, and no personally identifiable information is included in the analysis dataset.
+
+\subsection{Reliability Analysis}
+\label{sec:reliability}
+
+For each dimension we compute ICC(2,1) and ICC(2,k) with absolute agreement using the 100-image $\times$ 30-rater matrix. ICC(2,1) quantifies the reliability of a single randomly selected rater; ICC(2,k) quantifies the reliability of the mean of 30 raters. Bootstrap 95\% confidence intervals are reported. Dimensions with low reliability are treated as exploratory.
+
+\subsection{Frozen External Validation}
+\label{sec:frozen_validation}
+
+The saved primary model is applied \emph{once} to the 100 human-rated images. Predictions are correlated with mean human ratings using Spearman's $\rho$ and Kendall's $\tau$. Bootstrap 95\% confidence intervals are computed by resampling images with replacement. Benjamini--Hochberg false-discovery-rate control is applied across the four overlapping dimensions. No feature redesign, hyperparameter tuning, or model selection is performed after inspecting these results.
+
+\subsection{Rater and Image Saturation}
+\label{sec:saturation}
+
+Rater saturation randomly samples $m \in \{1,3,5,10,15,20,30\}$ raters without replacement, computes subset means, and compares them with the full 30-rater reference. The procedure is repeated 1,000 times per dimension. The predeclared sufficiency criterion is: median Spearman correlation with the 30-rater reference $\geq 0.95$, lower 2.5th percentile $\geq 0.90$, and frozen-model correlation within 0.05 of the 30-rater estimate.
+
+Image saturation samples stratified image counts $n \in \{20,40,60,80,100\}$, recomputes the frozen-model correlation, and reports bias, variance, and confidence-interval width relative to the full 100-image estimate, again with 1,000 repetitions.
+
+\subsection{Optional Small-Sample Calibration}
+\label{sec:calibration}
+
+A linear Ridge mapping from frozen proxy predictions to human means is fitted on stratified calibration sets of size $\{5,10,20,40,60\}$ and evaluated on the remaining held-out images. This layer is reported separately from frozen validation.
+
+\subsection{Baselines and Statistical Analysis}
+\label{sec:baselines}
+
+Fair baselines include global mean, category mean, the original theory formula, the 30-feature Ridge model, and deep representations (ResNet50, EfficientNet-B0, CLIP, DINOv2) with and without PCA (128 components). All baselines use identical group-aware splits. Deep baselines are evaluated on the 1,500-image subset for which deep features are available. Because deep and enhanced features do not cover all 100 human validation images, a direct frozen human baseline across all 100 images is not available and is reported as a limitation.
+
+\subsection{Reproducibility}
+\label{sec:reproducibility}
+
+A single command, \texttt{python run\_redesign\_pipeline.py}, regenerates all redesigned tables and figures. Each pipeline stage records a JSON metadata file with input/output paths, elapsed time, and a SHA-256 hash of the configuration. The integrity test suite verifies rating counts, split integrity, frozen-model presence, ICC ranges, and reconciliation between \texttt{frozen\_human\_validation.csv} and \texttt{master\_results.csv}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\linewidth]{fig_pipeline_four_layer.pdf}
+    \caption{Four-layer Human-Light study pipeline. Layer~A uses computational proxy targets; Layers~B--D use the independent human-rating dataset.}
+    \label{fig:pipeline}
+\end{figure}

@@ -1,0 +1,75 @@
+\documentclass[preprint,12pt]{elsarticle}
+
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+\usepackage{xurl}
+\usepackage{xcolor}
+\usepackage{geometry}
+\geometry{a4paper,margin=1in}
+\setlength{\emergencystretch}{3em}
+\sloppy
+
+\graphicspath{{figures_route_c/}{figures/}}
+\journal{Journal of Visual Communication and Image Representation}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Semantic Health Checks for Reproducible Visual-Feature Pipelines: A Two-Renderer Failure Case Study}
+
+\author[addr1]{Ming Zhu}
+\author[addr2]{Zihang Xue\corref{cor1}}
+\cortext[cor1]{Corresponding author. E-mail: xuezihang@stu.qlu.edu.cn}
+
+\address[addr1]{School of Art and Design, Henan University of Engineering, No.1 Xianghe Road, Longhu, Xinzheng, Zhengzhou, Henan 451191, China}
+\address[addr2]{Department of Light Engineering, Qilu University of Technology, No.3501 Daxue Road, Changqing District, Jinan, Shandong 250353, China}
+
+\begin{abstract}
+Byte-identical research objects can reproduce semantically inactive computations. We demonstrate this failure in five weighted visual-feature composites evaluated on 16,425 controlled Pillow-rendered images and a separately implemented 1,250-image OpenCV renderer. An unavailable optional OpenCV module had silently produced a constant saliency map in every image, removing 15--45\% of two formulas' absolute weight while all files remained finite, complete, and hash stable. We replace the fallback with an in-repository spectral-residual implementation and introduce four layered semantic-health gates: weighted-feature responsiveness, retained formula weight, rank-equivalent baseline rejection, and exported-score boundary-mass audit. In a causal column-replacement analysis under development-only scaling, repair raises the order composite's held-out correlation by 0.047 but lowers hierarchy's by 0.263---showing that software repair can invalidate a previously favourable result. With baselines selected and locked on development data, only order exceeds its elementary baseline; none of the five composites is selective for its nominal rendering-parameter target. On the second renderer, repaired features remain nonconstant, yet frozen score bounds collapse two exported scores to a single value, making their rank association undefined rather than zero. The contribution is a reusable semantic-health testing pattern for deterministic visual-feature pipelines and a fully traced two-renderer failure case study. It does not establish a perceptual scale or natural-image generalisation.
+\end{abstract}
+
+\begin{keyword}
+Semantic health \sep Visual features \sep Saliency \sep Synthetic stress test \sep Software testing \sep Reproducibility
+\end{keyword}
+
+\end{frontmatter}
+
+\input{sections_no_human/01-introduction}
+\input{sections_no_human/02-related_work}
+\input{sections_no_human/03-method}
+\input{sections_no_human/04-experiments}
+\input{sections_no_human/05-results}
+\input{sections_no_human/06-discussion}
+\input{sections_no_human/07-conclusion}
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+\section*{Author contributions}
+Ming Zhu: Conceptualization, Methodology, Software, Validation, Writing --- review and editing. Zihang Xue: Methodology, Software, Formal analysis, Data curation, Visualization, Writing --- original draft, Writing --- review and editing. Both authors approved the final manuscript.
+
+\section*{Data and code availability}
+The computational pipeline, exact feature definitions, reported tables, and canonical image manifests are in the versioned submission archive. The runnable Tier~B release contains all 16,425 Pillow images, all 1,250 internally controlled OpenCV images, the preserved pre-fix control, repaired features, protocol-v5 and protocol-v6 code, G-dev-frozen constants, complete crossing tables, pinned software, checksums, semantic assertions, and forced clean-recomputation logs. No restricted source contributes an empirical row or scaling constant to the active analysis. Historical mixed-licence material remains excluded. The archive will be deposited in Zenodo before camera-ready submission; the DOI and immutable release tag will replace this placeholder. The pipeline uses OpenCV~5.0~\citep{opencv2000}, NumPy~2.4~\citep{harris2020numpy}, SciPy~1.17~\citep{virtanen2020scipy}, pandas~3.0~\citep{mckinney2010pandas}, Pillow, and scikit-image~0.26~\citep{vanderwalt2014scikitimage}.
+
+\section*{Ethics statement}
+The active study contains no human raters, no human-subject data collection, no recruitment, no rating forms, and no scores. Historical human-study material is retained as project records but is excluded from the active no-human pipeline and release package.
+
+\section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
+During the preparation of this work, the authors used OpenAI ChatGPT and Codex to support language editing, literature organisation, and code review. The authors subsequently reviewed and edited all outputs, verified the cited sources and numerical claims against the released artifacts, and take full responsibility for the content of the article. No generative-AI system was used to create or alter the reported research images or figures.
+
+\section*{Funding}
+This research received no external funding.
+
+\section*{Acknowledgments}
+The authors thank the maintainers of the open-source scientific software used in the reproducibility workflow.
+
+\bibliographystyle{elsarticle-num}
+\bibliography{references}
+
+\end{document}

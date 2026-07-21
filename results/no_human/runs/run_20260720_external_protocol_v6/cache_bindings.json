@@ -1,0 +1,5 @@
+{
+  "external_image_fingerprint": "80460cefa9642a8419b74efd85b276ad3575b768fc424a73c6ca052328d0e8ba",
+  "original_gtest_image_fingerprint": "0e7e0d29e691a4369416d3e0640545d9daa1741be5c7cda7cc051552f6750417",
+  "binding_algorithm": "SHA-256 over sorted image_id, NUL, image_sha256 records"
+}

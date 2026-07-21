@@ -1,0 +1,43 @@
+% sections/04-experiments.tex
+
+\section{Experimental Setup}
+\label{sec:experiments}
+
+\subsection{Implementation}
+
+All redesigned experiments run under Python~3.11 with scikit-learn, pandas, SciPy, pingouin, and statsmodels. Feature extraction for the 30 core features takes approximately 40 minutes for 17,337 images on a consumer-grade Mac with Apple Silicon and no GPU. Model training completes within minutes and inference requires 0.07\,ms per image. The frozen model occupies 7.7\,KB. A full environment snapshot is stored in \texttt{results/redesign/manifests/environment.txt}.
+
+\subsection{Dataset Statistics}
+
+Table~\ref{tab:dataset_stats} summarizes the multi-source Phase~1 dataset. Categories are highly imbalanced: UI and Painting dominate, while Packaging, Poster, and Banner together contribute 3\% of the images. This imbalance motivates group-aware cross-validation and category-stratified evaluation.
+
+\begin{table}[htbp]
+\centering
+\caption{Multi-source dataset statistics across five image categories (Phase~1).}
+\label{tab:dataset_stats}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Category & Count & Source & Notes \\
+\midrule
+Painting & 6,450 & WikiArt (ModelScope mirror) & Baroque, Impressionism, Cubism, etc. \\
+UI & 10,386 & Phone\_Photosho\_UI, ShowUI-desktop & Mobile and desktop interface screenshots \\
+Packaging & 324 & Korean Product Labels, Drink\_284 & Product packaging designs \\
+Poster & 100 & poster-design & Graphic poster designs \\
+Banner & 77 & Korean Billboards, Banner Assets & Digital advertising banners \\
+\midrule
+\textbf{Total} & \textbf{17,337} & & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Evaluation Protocol}
+
+\textbf{Proxy development.} Group-aware, category-stratified 3-fold cross-validation on D-proxy-clean ($N = 15{,}694$) with $R^2$ as the metric. PCA, scaling, and any transformation are fitted inside each training fold.
+
+\textbf{Frozen human validation.} The pre-fitted primary model is applied to the 100 human-rated images. Spearman's $\rho$ and Kendall's $\tau$ are computed against mean human ratings with image-level bootstrap 95\% confidence intervals. Benjamini--Hochberg FDR correction is applied across the four overlapping dimensions.
+
+\textbf{Reliability.} ICC(2,1) and ICC(2,k) with absolute agreement are computed per dimension.
+
+\textbf{Saturation.} Rater and image subsampling use 1,000 random draws under the criteria described in Section~\ref{sec:saturation}.
+
+\textbf{Calibration.} Repeated stratified splits; calibration images are never used for final evaluation.

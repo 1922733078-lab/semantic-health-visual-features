@@ -1,0 +1,16 @@
+proxy,target,baseline,source_feature,direction,selection_split,development_rho,gtest_rho_diagnostic,selected_on_development
+visual_complexity_proxy,structural_clutter_index,contour_density,contour_density,1.0,G-dev,0.30258861785207486,0.6734004236041101,True
+visual_complexity_proxy,structural_clutter_index,gray_entropy,gray_entropy,1.0,G-dev,0.2698440677558003,0.7590078005728719,False
+visual_complexity_proxy,structural_clutter_index,edge_density,edge_density,1.0,G-dev,0.21224447362605117,0.6668527970403989,False
+layout_order_proxy,geometric_order_index,whitespace_ratio,whitespace_ratio,1.0,G-dev,0.35487647776161785,0.2291018945641917,True
+layout_order_proxy,geometric_order_index,symmetry,symmetry,1.0,G-dev,0.15317578169833568,0.31115473764966695,False
+layout_order_proxy,geometric_order_index,spacing_regularity,font_size_cv,-1.0,G-dev,0.044087619094697474,-0.09768559676801933,False
+colour_harmony_proxy,palette_coherence_index,negative_colourfulness,colourfulness,-1.0,G-dev,0.3158031630837707,0.19274637299851793,True
+colour_harmony_proxy,palette_coherence_index,negative_colour_entropy,color_entropy,-1.0,G-dev,0.2211941198671126,-0.04625561137716802,False
+colour_harmony_proxy,palette_coherence_index,colour_harmony,color_harmony,1.0,G-dev,-0.010516838607101769,-0.012289360087417192,False
+visual_intensity_proxy,visual_salience_index,luminance_spread,value_std,1.0,G-dev,0.27818290956323044,0.3238164637900577,True
+visual_intensity_proxy,visual_salience_index,rms_contrast,lightness_contrast,1.0,G-dev,0.18863056832043992,0.2559119011956245,False
+visual_intensity_proxy,visual_salience_index,mean_saturation,saturation_mean,1.0,G-dev,-0.13829676336765728,0.032356480060093507,False
+layout_hierarchy_proxy,focal_hierarchy_index,edge_coverage,edge_density,1.0,G-dev,0.44955352878252813,0.7500560537487173,True
+layout_hierarchy_proxy,focal_hierarchy_index,salient_area,fg_bg_ratio,1.0,G-dev,-0.01990969460060018,0.04497893934595334,False
+layout_hierarchy_proxy,focal_hierarchy_index,saliency_dispersion,saliency_std,1.0,G-dev,-0.05820005153457645,-0.07437578675454445,False

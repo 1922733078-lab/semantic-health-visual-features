@@ -1,0 +1,7 @@
+Highlights
+
+- Hash-stable extraction hid a constant saliency path across 17,675 images.
+- Semantic gates restored every nonzero-weight feature to active status.
+- Repair raised order correlation by 0.047 but lowered hierarchy by 0.263.
+- Frozen score bounds collapsed two otherwise responsive OpenCV scores.
+- Development-only selection overturned an all-five baseline-loss claim.

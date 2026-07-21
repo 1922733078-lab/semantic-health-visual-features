@@ -1,0 +1,56 @@
+# Public demonstration configuration for Tier B release
+# Uses the synthetic benchmark as the fully open dataset.
+
+no_human_evaluation: true
+project:
+  name: "Interpretable visual-complexity and layout-order proxy measurement — public demo"
+  version: "1.1"
+  date: "2026-07-13"
+  seed: 42
+
+paths:
+  image_manifest: "synthetic_benchmark/manifests/image_manifest.csv"
+  metadata: "synthetic_benchmark/metadata/target_metadata.csv"
+  traditional_features: "synthetic_benchmark/metadata/synthetic_traditional_features.csv"
+  enhanced_features: "synthetic_benchmark/metadata/synthetic_traditional_features.csv"
+  deep_features_dir: "data/features/deep"
+  output_root: "results/no_human"
+  manifests: "results/no_human/manifests"
+  quality_control: "results/no_human/quality_control"
+  tables: "results/no_human/tables"
+  figures: "results/no_human/figures"
+  data: "results/no_human/data"
+  logs: "results/no_human/logs"
+
+constructs:
+  visual_complexity_proxy:
+    groups: ["colour", "edge_texture", "composition", "text_layout"]
+    range: [0, 100]
+  layout_order_proxy:
+    groups: ["symmetry_alignment", "whitespace", "regularity"]
+    range: [0, 100]
+  colour_harmony_proxy:
+    groups: ["colour"]
+    range: [0, 100]
+  visual_intensity_proxy:
+    groups: ["colour", "edge_texture"]
+    range: [0, 100]
+  layout_hierarchy_proxy:
+    groups: ["text_layout", "saliency"]
+    range: [0, 100]
+
+stability_transforms:
+  jpeg_compression:
+    quality: [90, 75]
+  brightness_shift:
+    factor: [0.95, 1.05]
+  contrast_shift:
+    factor: [0.95, 1.05]
+  resize:
+    scale: [0.95, 1.05]
+  gaussian_noise:
+    std: [0.005, 0.01]
+
+independent_references:
+  - "deep_embedding_distance"
+  - "segmentation_geometry"

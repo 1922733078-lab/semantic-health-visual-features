@@ -1,0 +1,13 @@
+generator,metric,target,expected_direction,n_images,n_seed_clusters,rho,cluster_ci_lower,cluster_ci_upper,responsive_expected_sign
+original_G-test,canny_edge_density,structural_clutter_index,1,6250,10,0.662899858308854,0.655905492855357,0.6710562441922745,True
+original_G-test,multiscale_lab_residual_entropy,structural_clutter_index,1,6250,10,0.5330940100500826,0.5202085549460582,0.5490461674955283,True
+original_G-test,jpeg_bytes_per_pixel_q90,structural_clutter_index,1,6250,10,0.48461864106831926,0.46911868154961295,0.5003426532830167,True
+original_G-test,hasler_susstrunk_colourfulness,palette_coherence_index,-1,6250,10,-0.18401815431214266,-0.2106620460385363,-0.1560349136386918,True
+original_G-test,global_luminance_cv,visual_salience_index,1,6250,10,0.2652154753604604,0.24453664268155237,0.2871208297298376,True
+original_G-test,horizontal_mirror_similarity,geometric_order_index,1,6250,10,0.31848909080940946,0.2920745923840839,0.34420637218245,True
+internal_opencv,canny_edge_density,structural_clutter_index,1,1250,10,0.4684937234950647,0.4454541486362402,0.49102943564086177,True
+internal_opencv,multiscale_lab_residual_entropy,structural_clutter_index,1,1250,10,0.7091655235495421,0.6673230169757458,0.7644144008985062,True
+internal_opencv,jpeg_bytes_per_pixel_q90,structural_clutter_index,1,1250,10,0.7739835905663489,0.7391048481970254,0.8124803009647327,True
+internal_opencv,hasler_susstrunk_colourfulness,palette_coherence_index,-1,1250,10,0.005344200451359045,-0.050555846655546376,0.060593993613921565,False
+internal_opencv,global_luminance_cv,visual_salience_index,1,1250,10,0.8559389959046286,0.835415165877786,0.8892195897992817,True
+internal_opencv,horizontal_mirror_similarity,geometric_order_index,1,1250,10,0.6401408401018039,0.6103016244015792,0.6711386324670379,True

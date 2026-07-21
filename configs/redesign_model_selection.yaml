@@ -1,0 +1,42 @@
+primary_model: ridge_alpha10
+dimensions:
+- overall
+- beauty
+- complexity
+- order
+- emotion
+features:
+- num_dominant_colors
+- hue_mean
+- saturation_mean
+- saturation_std
+- value_mean
+- value_std
+- lightness_contrast
+- color_entropy
+- warm_color_ratio
+- hue_contrast
+- color_harmony
+- edge_density
+- edge_orientation_entropy
+- gray_mean
+- gray_std
+- gray_entropy
+- gradient_energy
+- symmetry
+- rule_of_thirds
+- center_offset_x
+- center_offset_y
+- whitespace_ratio
+- fg_bg_ratio
+- diagonal_energy_ratio
+- text_coverage
+- text_block_count
+- font_size_cv
+- has_text
+- saliency_mean
+- saliency_std
+seed: 42
+n_splits: 3
+d_proxy_clean_size: 15632
+note: Model selected by group-aware CV on D-proxy clean subset. D-human was not used.

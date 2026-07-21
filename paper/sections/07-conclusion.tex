@@ -1,0 +1,8 @@
+% sections/07-conclusion.tex
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+We presented a human-light, interpretable framework for visual complexity and aesthetic proxy assessment in art and design images. By separating large-scale proxy development from frozen human validation, the study avoids circular evaluation and provides an auditable link to human perception. The 30-feature Ridge model is efficient (0.07\,ms per image, 7.7\,KB) and achieves positive frozen alignment with human mean ratings for Complexity ($\rho = 0.773$), Order ($\rho = 0.724$), Beauty ($\rho = 0.565$), and Emotion ($\rho = 0.408$). Rater- and image-saturation experiments show that stable validation can be obtained with 10--20 raters and 80--100 stratified images.
+
+The framework does not eliminate the need for human evaluation. Hierarchy is not reliably captured by the current features or human ratings, and deep-feature baselines could not be evaluated on the full human validation set because of coverage limitations. Future work should expand underrepresented categories, validate the rater-saturation recommendations in new populations, and explore semantic or vision-language features for the hierarchy dimension.

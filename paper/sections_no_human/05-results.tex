@@ -1,0 +1,56 @@
+\section{Results}
+\label{sec:results}
+
+\subsection{RQ1: the semantic gates expose a reproducible inactive path}
+
+The pre-fix control is complete, finite, and hash stable, yet all six saliency-dependent fields have one value across the 16,425 Pillow images (the same fallback is input-independent by code inspection and would produce identical constants on any decodable image, including the 1,250 OpenCV images). The repaired extraction returns 16,413 unique map means, 16,409 unique map standard deviations, 12,610 unique salient-area fractions, and 16,425 unique values for each centroid-derived thirds or offset field. All post-fix active weighted features pass the G-dev responsiveness gate; no image is missing and no numeric feature is non-finite.
+
+The defect was concentrated but consequential. Table~\ref{tab:semantic_repair} shows that the constant map removed 15\% of the order formula's absolute weight and 45\% of hierarchy's. Replacing only the ten saliency-derived columns raises order's nominal G-test correlation from 0.227 to 0.275 ($\Delta\rho=0.047$) but lowers hierarchy from 0.524 to 0.260 ($\Delta\rho=-0.263$). Complexity, harmony, and intensity do not use an affected field and remain unchanged in the saliency-only comparison. The fully re-extracted pipeline, which also makes k-means deterministic, gives 0.623 for complexity and $-0.098$ for harmony; their differences from the saliency-only control are small.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.78\textwidth]{semantic_health_weight_retention.png}
+\caption{Fraction of absolute formula weight attached to responsive G-dev features before and after repair. Byte-level reproduction did not reveal the lost order and hierarchy terms.}
+\label{fig:weight_retention}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{pre_post_nominal_correlations.png}
+\caption{G-test nominal associations before and after replacing only saliency-derived columns. Repair improves order but substantially weakens the previously favourable hierarchy result.}
+\label{fig:pre_post}
+\end{figure}
+
+Score-distribution checks reveal additional stress even within the primary renderer. On G-test, final clipping affects 39.3\% of complexity values, 25.2\% of order, 16.7\% of intensity, 5.1\% of hierarchy, and 3.0\% of harmony. The largest exact tie equals the boundary mass for complexity and order. These scores remain nonconstant on Pillow G-test, but the diagnostics warn that a correlation can depend heavily on a clipped tail.
+
+\subsection{RQ2: corrected held-out conclusions}
+
+Table~\ref{tab:primary_v5} reports the fully repaired pipeline with target, feature, and score scaling fitted on G-dev only. Complexity has the largest nominal association ($\rho=0.623$, seed-cluster 95\% CI $[0.615,0.630]$), but its largest non-target association is stronger ($|\rho|=0.667$), giving a selectivity margin of $-0.044$. Order, intensity, and hierarchy also respond more strongly to another target. Harmony has a small positive margin, but its nominal direction is negative ($\rho=-0.098$). Thus none of the five legacy names is supported as a selective operational label by this controlled G-test.
+
+Development-only baseline selection changes the earlier overbroad ``all composites lose'' claim (Table~\ref{tab:baseline_v5}). The order composite exceeds its G-dev-selected whitespace baseline on G-test by 0.045, with paired cluster interval $[0.032,0.057]$. Complexity is 0.051 below contour density; harmony is 0.290 below negative colourfulness; intensity is 0.137 below luminance spread; and hierarchy is 0.490 below edge coverage. The order gain is real within this protocol, but its negative selectivity margin prevents a broader construct claim.
+
+Pixel-side controls in Table~\ref{tab:controls_v6} show that the corrected feature matrix contains target information, although transfer varies sharply. On Pillow G-test, ridge correlations range from 0.362 for palette coherence to 0.855 for focal hierarchy. On the OpenCV renderer they range from 0.102 to 0.646. All 38 numeric features vary on G-dev, so these results no longer benefit from nominal-but-constant columns. The weak cross-renderer palette and hierarchy probes limit attribution of a formula failure to the formula alone.
+
+\subsection{RQ3: feature repair survives, score rescaling does not always survive}
+
+All six repaired saliency-dependent fields remain finite and nonconstant on the 1,250 OpenCV images. Their unique counts range from 1,218 for salient-area fraction to 1,250 for five fields. The factor design is exactly pairwise orthogonal (maximum off-diagonal target $|\rho|=0$), whereas the Pillow G-test target system reaches 0.783. This contrast makes the second renderer useful for mechanism crossing, but it is not a natural-image validation set.
+
+At the feature layer, the repair transfers. At the score layer, two formulas collapse. Every OpenCV complexity and intensity raw sum falls below its frozen G-dev 0--100 lower bound; both final scores are therefore constant zero. Order is nonconstant but 74.1\% of its final values lie at the upper boundary. Table~\ref{tab:external_v6} separates the raw and final results: complexity's raw sum has $\rho=0.895$ with clutter and intensity's has $\rho=0.674$ with salience, yet both published-range scores are constant, making their Spearman association \emph{undefined} (not zero). The defect is no longer a missing optional dependency; it is a domain-shift failure of the frozen rescaling layer.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{external_score_boundary_collapse.png}
+\caption{Nominal OpenCV associations before and after the frozen G-dev 0--100 transformation. Complexity and intensity retain rank signal in their raw weighted sums but lose all variation after clipping.}
+\label{fig:score_collapse}
+\end{figure}
+
+The operational descriptors in Table~\ref{tab:operational_v6} provide positive and negative mechanism checks. Canny edge fraction, Lab residual entropy, and JPEG bytes per pixel respond positively to clutter in both renderers. Luminance coefficient of variation responds to salience, and mirror similarity responds to order. Hasler--Suesstrunk colourfulness is negatively related to Pillow palette coherence but shows no stable OpenCV response ($\rho=0.005$, interval $[-0.051,0.061]$). Descriptively, five of six declared operational descriptor--target pairs retain the expected interval sign in both internal systems; this is a descriptive count, not a confirmatory multiple-testing result.
+
+The complete crossing table adds a stricter interpretation. Repaired saliency dispersion is negatively associated with Pillow focal hierarchy ($-0.074$) but positively associated with OpenCV hierarchy (0.265); salient-area fraction changes sign; and centroid offsets respond to order with different magnitudes. These mechanisms are active, but their relation to the generator target is not invariant. Likewise, raw OpenCV order and hierarchy remain more responsive to non-targets than to their nominal target. The second renderer therefore confirms software responsiveness while rejecting simple attribution.
+
+\subsection{Reproducibility outcome}
+
+The primary test suite contains 56 tests and passes after the repair. Protocol v5 releases G-dev target and feature constants, weighted-feature health, clipping and tie diagnostics, all 25 G-test associations, baseline candidates and selections, paired intervals, controls, input hashes, and runtime versions. Protocol v6 releases all image hashes, six field-level health rows, five score-level health rows, 120 renderer--descriptor--target intervals, raw and clipped composite tables, and ridge intervals. Clean-environment and package-level verification are reported with the research object rather than inferred from local execution alone.
+
+\input{sections_no_human/generated_tables_v5}
+\clearpage

@@ -1,0 +1,6 @@
+proxy,target,n_images,n_seed_clusters,rho,cluster_ci_lower,cluster_ci_upper,max_abs_non_target_rho,max_abs_non_target_name,selectivity_margin
+visual_complexity_proxy,structural_clutter_index,1250,10,0.0,0.0,0.0,0.0,geometric_order_index,0.0
+layout_order_proxy,geometric_order_index,1250,10,0.2487130285048954,0.2290181940974911,0.26785087035870075,0.6663384239456567,structural_clutter_index,-0.41762539544076127
+colour_harmony_proxy,palette_coherence_index,1250,10,0.06054042706108674,-0.13240399046889578,0.22061429541377195,0.27792394614471627,focal_hierarchy_index,-0.21738351908362952
+visual_intensity_proxy,visual_salience_index,1250,10,0.0,0.0,0.0,0.0,structural_clutter_index,0.0
+layout_hierarchy_proxy,focal_hierarchy_index,1250,10,0.13093839791707626,0.09884836674189142,0.16700905892406412,0.4459029039550488,visual_salience_index,-0.31496450603797255

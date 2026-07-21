@@ -1,0 +1,16 @@
+version,proxy,fit_split,raw_p0_5,raw_p99_5,retained_abs_weight_fraction
+pre_fix_silent_fallback,visual_complexity_proxy,G-dev,-1.6994508956345966,1.7365866223038955,1.0
+pre_fix_silent_fallback,layout_order_proxy,G-dev,-1.8676576673568803,1.6052060079328023,0.85
+pre_fix_silent_fallback,colour_harmony_proxy,G-dev,-1.3417633181930566,1.2420199917592045,1.0
+pre_fix_silent_fallback,visual_intensity_proxy,G-dev,-1.190174608780199,1.5135562938194884,1.0
+pre_fix_silent_fallback,layout_hierarchy_proxy,G-dev,-0.8068220299453858,1.0739426135172625,0.55
+post_fix_saliency_columns_only,visual_complexity_proxy,G-dev,-1.6994508956345966,1.7365866223038955,1.0
+post_fix_saliency_columns_only,layout_order_proxy,G-dev,-2.003177899415934,1.732454085165054,1.0
+post_fix_saliency_columns_only,colour_harmony_proxy,G-dev,-1.3417633181930566,1.2420199917592045,1.0
+post_fix_saliency_columns_only,visual_intensity_proxy,G-dev,-1.190174608780199,1.5135562938194884,1.0
+post_fix_saliency_columns_only,layout_hierarchy_proxy,G-dev,-1.3011973607374934,1.552200343666851,1.0
+post_fix_spectral_residual,visual_complexity_proxy,G-dev,-1.6901754795536144,1.733830467407068,1.0
+post_fix_spectral_residual,layout_order_proxy,G-dev,-2.003177899415934,1.732454085165054,1.0
+post_fix_spectral_residual,colour_harmony_proxy,G-dev,-1.3404177869726805,1.223726724777265,1.0
+post_fix_spectral_residual,visual_intensity_proxy,G-dev,-1.190174608780199,1.5135562938194884,1.0
+post_fix_spectral_residual,layout_hierarchy_proxy,G-dev,-1.3011973607374934,1.552200343666851,1.0

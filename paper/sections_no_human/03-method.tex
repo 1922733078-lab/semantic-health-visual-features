@@ -1,0 +1,73 @@
+\section{Method}
+\label{sec:method}
+
+\subsection{Study scope and claim boundaries}
+
+The active study contains no human-subject data. It audits five historically specified weighted formulas against five rendering-parameter engineering targets. The target names---structural clutter, geometric order, palette coherence, visual salience, and focal hierarchy---describe controlled generator variables, not perceptual constructs. The formula names---complexity, order, harmony, intensity, and hierarchy---are retained for traceability, not asserted as validated measurement scales.
+
+This paper claims: (i)~a reusable set of semantic-health gates for deterministic visual-feature pipelines; (ii)~a traced failure case study across two internally controlled renderers. It does \emph{not} claim: perceptual validity, natural-image generalisation, external replication, or that the five formulas represent established scientific definitions. The empirical evidence is drawn from one project's pipeline; generalisation to other systems requires independent application of the gates.
+
+Each image is decoded with OpenCV and resized to $512\times512$. The extractor computes 38 numeric descriptors spanning colour (10), edge/texture (6), composition (7), projection (4), and saliency (11) groups. Legacy fields such as \texttt{text\_block\_count} and \texttt{font\_size\_cv} are documented by their exact pixel operations and do not imply OCR, text-block detection, or font measurement. The full field dictionary is released with the code.
+
+\subsection{Observed failure}
+
+The pre-fix saliency function attempted \path{cv2.saliency.StaticSaliencyFineGrained_create()}. All exceptions were suppressed and replaced by a $512\times512$ map filled with 0.5. Core OpenCV installations do not necessarily expose the optional \texttt{saliency} namespace. Consequently, \texttt{saliency\_mean}=0.5, \texttt{saliency\_std}=0, and \texttt{fg\_bg\_ratio}=0 for every image; the saliency centroid was fixed, making the thirds score and both centroid offsets constant as well.
+
+The old output is preserved as a pre-fix control. The failure is evaluated at three levels: field responsiveness, retained absolute weight in each legacy formula, and change in held-out nominal correlation. Pre-fix constant inputs receive zero effective contribution for this comparison and are explicitly marked failed; they are not silently standardised with a unit denominator.
+
+\subsection{Spectral-residual repair and fail-fast extraction}
+
+The repaired function follows the spectral-residual idea of Hou and Zhang \citep{hou2007spectral}. Grayscale input is reduced to $64\times64$, Fourier transformed, and represented by log amplitude $L(f)$ and phase $P(f)$. With a $3\times3$ local mean $A(f)$, the residual is
+\begin{equation}
+R(f)=L(f)-A(f),
+\end{equation}
+and the spatial response is the squared magnitude of
+\begin{equation}
+\mathcal{F}^{-1}\{\exp(R(f)+iP(f))\}.
+\end{equation}
+After Gaussian smoothing, min--max normalisation, and resizing, the map must be finite, bounded in $[0,1]$, and nonconstant for a non-uniform internal-resolution input. The implementation uses only NumPy FFT and OpenCV core. Uniform images receive an explicit zero map.
+
+Batch extraction now raises on missing or undecodable images, non-finite values, incomplete output, or duplicate identifiers. OpenCV k-means is seeded from the image bytes so worker scheduling cannot alter colour features. Unit tests use controlled focal locations to require nonconstant maps and changing centroid features.
+
+\subsection{Reusable semantic-health gates}
+
+Before held-out analysis, the development split is subjected to four gates:
+\begin{enumerate}
+    \item every nonzero-weight feature must exist, be finite, and have sample standard deviation above $10^{-12}$;
+    \item retained absolute weight is reported per formula, with a post-fix requirement of 1.0;
+    \item candidate baseline score vectors are compared pairwise, and identical or reversed rankings ($|\rho|=1$ within $10^{-12}$) are rejected;
+    \item each score reports feature $z$-clipping, final-boundary clipping, unique values, and the largest exact-tie fraction by split.
+\end{enumerate}
+These checks are deterministic assertions suitable for automated testing. Passing them establishes computational responsiveness, not construct validity.
+
+\subsection{Legacy formulas under audit}
+\label{sec:proxies}
+
+The five case subjects are fixed weighted sums of G-dev-standardised features. Let $z_f$ denote the $z$-scored value of feature $f$ (G-dev mean and standard deviation, clipped to $[-4,4]$). The five formulas are:
+
+\begin{align}
+\text{complexity} &= 0.20\,z_{\text{num\_dominant\_colors}} + 0.15\,z_{\text{color\_entropy}} + 0.25\,z_{\text{edge\_density}} \notag \\
+&\quad + 0.15\,z_{\text{edge\_orient\_entropy}} + 0.10\,z_{\text{gradient\_energy}} \notag \\
+&\quad + 0.05\,z_{\text{text\_block\_count}} - 0.05\,z_{\text{whitespace\_ratio}} - 0.05\,z_{\text{symmetry}} \label{eq:complexity} \\[6pt]
+\text{order} &= 0.25\,z_{\text{symmetry}} + 0.20\,z_{\text{whitespace\_ratio}} + 0.15\,z_{\text{rule\_of\_thirds}} \notag \\
+&\quad - 0.25\,z_{\text{edge\_density}} - 0.10\,z_{\text{text\_block\_count}} - 0.05\,z_{\text{lightness\_contrast}} \label{eq:order} \\[6pt]
+\text{harmony} &= 0.30\,z_{\text{color\_harmony}} + 0.25\,z_{\text{warm\_color\_ratio}} + 0.20\,z_{\text{saturation\_std}} \notag \\
+&\quad - 0.15\,z_{\text{hue\_contrast}} - 0.10\,z_{\text{num\_dominant\_colors}} \label{eq:harmony} \\[6pt]
+\text{intensity} &= 0.35\,z_{\text{saturation\_mean}} + 0.25\,z_{\text{lightness\_contrast}} + 0.20\,z_{\text{gradient\_energy}} \notag \\
+&\quad + 0.10\,z_{\text{warm\_color\_ratio}} + 0.10\,z_{\text{saturation\_std}} \label{eq:intensity} \\[6pt]
+\text{hierarchy} &= 0.25\,z_{\text{edge\_density}} + 0.20\,z_{\text{saliency\_std}} + 0.15\,z_{\text{fg\_bg\_ratio}} \notag \\
+&\quad + 0.15\,z_{\text{text\_block\_count}} + 0.10\,z_{\text{has\_text}} \notag \\
+&\quad + 0.10\,z_{\text{saliency\_mean}} - 0.05\,z_{\text{whitespace\_ratio}} \label{eq:hierarchy}
+\end{align}
+
+The hierarchy formula assigns combined weight 0.45 to saliency-derived fields (\texttt{saliency\_std}, \texttt{fg\_bg\_ratio}, \texttt{saliency\_mean}); the order formula assigns 0.15 to the saliency-centroid thirds score. These formulas have no externally identifiable scientific source or validated application; we analyse them only as legacy artefacts whose behaviour should be diagnosed before reuse.
+
+The five rendering-parameter targets are likewise weighted sums of generator metadata columns, standardised on G-dev. Their exact construction is released in the protocol script; each target reads only rendering-parameter metadata, while the feature extractor reads only image pixels, preventing direct column leakage.
+
+\subsection{Leakage-controlled scaling and inference}
+
+All raw target means and sample standard deviations are estimated on G-dev and applied unchanged to validation, G-test, and interaction rows. Each active image feature is likewise standardised using G-dev mean and sample standard deviation, clipped to $[-4,4]$, and combined with its fixed weight. Composite 0.5th and 99.5th percentile bounds are estimated from G-dev raw scores and then frozen. No G-test row contributes to a target, feature, or score-scaling constant.
+
+Primary evaluation reports Spearman correlation for all $5\times5=25$ formula--target pairs on G-test. When a score vector is constant (zero variance), the Spearman coefficient is mathematically undefined; we report it as ``undefined (constant output)'' rather than assigning a numerical value. Uncertainty uses 2,000 deterministic percentile-bootstrap draws of the ten rendering seeds as intact clusters. These intervals quantify sensitivity to the ten rendering seeds; they do not estimate sampling variability from a natural-image population or from the space of possible renderer programs. Ordinary bootstrap sign frequencies are not converted into zero-null $p$ or $q$ values. Selectivity is the absolute nominal correlation minus the largest absolute non-target correlation and is reported descriptively without a universal threshold.
+
+Three non-rank-duplicate elementary baseline candidates are declared per formula (Table~\ref{tab:baseline_v5}). Direction-adjusted correlation is computed on G-dev, the strongest candidate is locked with a lexical tie break, and only then is the paired formula--baseline difference evaluated on G-test with the same cluster draws. Because selection and evaluation use different splits, the paired difference does not require correction for the selection step, but the reader should note that the G-dev and G-test splits are confounded with rendering style (A vs.\ C); the locked-baseline result therefore reflects both formula quality and style shift. Ridge recoverability probes remove G-dev-constant features, select $\alpha\in\{0.1,1,10,100\}$ on G-validation, refit on G-dev plus G-validation, and report cluster intervals on both held-out renderers.

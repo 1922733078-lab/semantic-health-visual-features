@@ -1,0 +1,204 @@
+% sections/05-results.tex
+
+\section{Results}
+\label{sec:results}
+
+All numbers reported in this section are generated from \texttt{results/redesign/tables/master\_results.csv} and are reconciled against individual analysis outputs.
+
+\subsection{Human-Rating Reliability}
+
+Table~\ref{tab:icc} reports inter-rater reliability. Complexity and Emotion show acceptable single-rater reliability (ICC(2,1) = 0.486 and 0.427), while Beauty is moderate (0.249), Order is low (0.110), and Hierarchy is effectively zero (0.025). The mean-of-30-rater reliabilities (ICC(2,k)) are high for Complexity, Emotion, and Beauty, but remain marginal for Hierarchy (0.434). Consequently, Hierarchy is treated as exploratory and is not included in the frozen proxy validation.
+
+\begin{table}[htbp]
+\centering
+\caption{Human-rating reliability by dimension (100 images, 30 raters). ICC(2,1) = single-rater absolute agreement; ICC(2,k) = mean-of-$k$-raters absolute agreement; 95\% CI in brackets.}
+\label{tab:icc}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Dimension & ICC(2,1) & 95\% CI & ICC(2,k) & 95\% CI \\
+\midrule
+Complexity & 0.486 & [0.41, 0.57] & 0.966 & [0.95, 0.98] \\
+Emotion & 0.427 & [0.34, 0.52] & 0.957 & [0.94, 0.97] \\
+Beauty & 0.249 & [0.18, 0.33] & 0.908 & [0.87, 0.94] \\
+Order & 0.110 & [0.08, 0.15] & 0.788 & [0.72, 0.84] \\
+Hierarchy & 0.025 & [0.01, 0.04] & 0.434 & [0.30, 0.56] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\linewidth]{rating_distribution_by_dimension.pdf}
+    \caption{Rating distributions by dimension (D-human-raw, 100 images $\times$ 30 raters).}
+    \label{fig:rating_distribution}
+\end{figure}
+
+\subsection{Proxy-Task Development Results}
+
+Table~\ref{tab:proxy_cv} reports group-aware 3-fold cross-validation $R^2$ on D-proxy-clean. Ridge with $\alpha = 10$ is selected as the frozen primary model because it achieves the highest overall $R^2$ while remaining lightweight and interpretable. These metrics measure agreement with the computational proxy task, not with human perception.
+
+\begin{table}[htbp]
+\centering
+\caption{Proxy-task performance on D-proxy-clean ($N = 15{,}694$, group-aware 3-fold CV). Overall is the mean of the five per-dimension $R^2$ values.}
+\label{tab:proxy_cv}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Model & Overall & Beauty & Complexity & Order & Emotion \\
+\midrule
+Ridge ($\alpha = 10$) & 0.831 & 0.482 & 0.314 & 0.026 & 0.765 \\
+Ridge ($\alpha = 1$) & 0.831 & 0.482 & 0.314 & 0.026 & 0.765 \\
+Ridge ($\alpha = 0.1$) & 0.831 & 0.482 & 0.314 & 0.026 & 0.765 \\
+Gradient Boosting & \textbf{0.834} & 0.474 & 0.309 & 0.023 & 0.759 \\
+Random Forest & 0.826 & 0.449 & 0.282 & 0.001 & 0.749 \\
+Category mean & 0.002 & 0.120 & 0.129 & 0.006 & 0.083 \\
+Global mean & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Frozen External Validation on D-Human}
+
+Table~\ref{tab:frozen_human} reports the primary human-alignment result. The model was fitted exclusively on D-proxy-clean and applied once to the 100 human-rated images. Complexity shows the strongest alignment ($\rho = 0.773$), followed by Order ($\rho = 0.724$), Beauty ($\rho = 0.565$), and Emotion ($\rho = 0.408$). All 95\% confidence intervals exclude zero, and all FDR-corrected $p$ values are below 0.001 (Emotion is the weakest at $2.5 \times 10^{-5}$). Kendall's $\tau$ values follow the same ordering.
+
+\begin{table}[htbp]
+\centering
+\caption{Frozen external validation against human mean ratings ($N = 100$ images, 30 raters). Spearman's $\rho$ with bootstrap 95\% CI; $p$ values are FDR-corrected across the four overlapping dimensions.}
+\label{tab:frozen_human}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Dimension & $\rho$ & 95\% CI & $p$ & $\tau$ & 95\% CI \\
+\midrule
+Complexity & 0.773 & [0.663, 0.851] & $<10^{-20}$ & 0.590 & [0.495, 0.672] \\
+Order & 0.724 & [0.611, 0.808] & $<10^{-17}$ & 0.537 & [0.443, 0.621] \\
+Beauty & 0.565 & [0.395, 0.697] & $<10^{-9}$ & 0.392 & [0.267, 0.509] \\
+Emotion & 0.408 & [0.208, 0.581] & $2.5 \times 10^{-5}$ & 0.290 & [0.157, 0.424] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\linewidth]{prediction_vs_human_mean.pdf}
+    \caption{Frozen model predictions versus human mean ratings for the four validated dimensions ($N = 100$).}
+    \label{fig:prediction_vs_human}
+\end{figure}
+
+\subsection{Rater Saturation}
+
+Table~\ref{tab:rater_saturation} summarizes the rater-saturation analysis. Applying the predeclared criterion (median reference correlation $\geq 0.95$, lower bound $\geq 0.90$, model correlation within 0.05), the estimated minimum rater counts are: Complexity 10, Emotion 10, Beauty 15, and Order 20. Hierarchy remains unreliable even at 30 raters and is reported as exploratory.
+
+\begin{table}[htbp]
+\centering
+\caption{Rater-saturation thresholds. Smallest $m$ satisfying median $\rho_{\text{ref}} \geq 0.95$, lower bound $\geq 0.90$, and $|\rho_{\text{model}} - \rho_{30}| \leq 0.05$.}
+\label{tab:rater_saturation}
+\begin{tabular}{@{}lc@{}}
+\toprule
+Dimension & Minimum raters \\
+\midrule
+Complexity & 10 \\
+Emotion & 10 \\
+Beauty & 15 \\
+Order & 20 \\
+Hierarchy & unreliable at 30 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\linewidth]{rater_saturation_by_dimension.pdf}
+    \caption{Rater saturation: median Spearman correlation between subset-mean and full 30-rater mean, with 95\% uncertainty bands.}
+    \label{fig:rater_saturation}
+\end{figure}
+
+\subsection{Rated-Image Saturation}
+
+Table~\ref{tab:image_saturation} reports the frozen-model correlation when only $n$ stratified images are used. At $n = 80$ the point estimates and confidence intervals are close to the full 100-image values for Complexity, Beauty, and Order; Emotion remains more variable. These results suggest that 80--100 stratified images provide stable validation conclusions for this task.
+
+\begin{table}[htbp]
+\centering
+\caption{Image-saturation at $n = 80$ versus full $N = 100$. Values are Spearman's $\rho$ (bootstrap 95\% CI).}
+\label{tab:image_saturation}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Dimension & $n = 80$ & $N = 100$ & CI width at $n = 80$ \\
+\midrule
+Complexity & 0.771 [0.732, 0.819] & 0.773 & 0.087 \\
+Beauty & 0.565 [0.512, 0.619] & 0.565 & 0.108 \\
+Order & 0.722 [0.687, 0.760] & 0.724 & 0.072 \\
+Emotion & 0.406 [0.324, 0.480] & 0.408 & 0.156 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\linewidth]{image_saturation_by_dimension.pdf}
+    \caption{Image saturation: frozen-model Spearman correlation as a function of stratified sample size. Error bars show bootstrap 95\% intervals.}
+    \label{fig:image_saturation}
+\end{figure}
+
+\subsection{Optional Calibration Efficiency}
+
+Linear calibration on 5--60 human-rated images provides negligible improvement over the frozen model for all dimensions. For example, with 60 calibration images the median calibrated Complexity correlation is 0.783, a gain of 0.009 over the frozen value of 0.773. Calibration is therefore reported as secondary; the frozen validation remains the primary result.
+
+\subsection{Baseline and Efficiency Comparison}
+
+Table~\ref{tab:baselines} compares the 30-feature Ridge model with baselines on the 1,500-image proxy subset that has deep features. The theory-derived formula and the 30-feature Ridge outperform all raw and PCA-reduced deep representations, which produce negative $R^2$ on this small subset. This comparison is limited to the proxy subset because deep and enhanced features are unavailable for the full 100-image human validation set.
+
+\begin{table}[htbp]
+\centering
+\caption{Proxy-subset baseline comparison ($N \approx 1{,}500$, group-aware CV). Values are overall $R^2$ and per-dimension $R^2$.}
+\label{tab:baselines}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Method & Overall & Beauty & Complexity & Order & Emotion \\
+\midrule
+Theory formula & 0.808 & 0.411 & 0.329 & 0.033 & 0.773 \\
+30-feature Ridge & 0.761 & 0.330 & 0.155 & $-0.092$ & 0.699 \\
+ResNet50+PCA128+Ridge & $-0.172$ & $-0.080$ & $-0.006$ & $-0.257$ & 0.012 \\
+CLIP+PCA128+Ridge & $-0.123$ & $-0.174$ & 0.020 & $-0.341$ & 0.069 \\
+DINOv2+PCA128+Ridge & $-0.194$ & $-0.231$ & $-0.125$ & $-0.381$ & $-0.083$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The frozen primary model requires 0.07\,ms per image and 7.7\,KB of storage, compared with hundreds of megabytes for pretrained deep networks. This efficiency is central to the practical utility of the framework.
+
+\subsection{Interpretability}
+
+Because the primary model is linear, feature importance is reported through standardized Ridge coefficients rather than SHAP values. Table~\ref{tab:top_features} lists the three most influential positive and negative predictors per dimension.
+
+\begin{table}[htbp]
+\centering
+\caption{Top three positive and negative standardized Ridge coefficients per dimension on D-proxy-clean.}
+\label{tab:top_features}
+\begin{tabular}{@{}lp{4.5cm}p{4.5cm}@{}}
+\toprule
+Dimension & Positive predictors & Negative predictors \\
+\midrule
+Beauty & warm\_color\_ratio (0.246), saturation\_std (0.228), color\_entropy (0.155) & lightness\_contrast ($-0.053$), value\_mean ($-0.053$), rule\_of\_thirds ($-0.011$) \\
+Complexity & num\_dominant\_colors (0.222), lightness\_contrast (0.076), text\_coverage (0.056) & gray\_std ($-0.039$), value\_std ($-0.035$), symmetry ($-0.029$) \\
+Emotion & saturation\_mean (0.689), warm\_color\_ratio (0.224), lightness\_contrast (0.176) & gray\_mean ($-0.064$), hue\_mean ($-0.022$), value\_std ($-0.006$) \\
+Order & symmetry (0.055), gray\_std (0.053), value\_std (0.020) & lightness\_contrast ($-0.064$), whitespace\_ratio ($-0.058$), text\_coverage ($-0.037$) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\linewidth]{feature_importance_proxy.pdf}
+    \caption{Standardized Ridge coefficients for the frozen primary model. Positive and negative directions are shown separately.}
+    \label{fig:feature_importance}
+\end{figure}
+
+\subsection{Robustness and Failure Analysis}
+
+Removing the four OCR/layout features (text\_coverage, text\_block\_count, font\_size\_cv, has\_text) and refitting Ridge on D-proxy-clean causes only small drops on D-human: Complexity falls from 0.773 to 0.737 ($\Delta = -0.036$), Order from 0.724 to 0.688 ($\Delta = -0.035$), Emotion from 0.408 to 0.403 ($\Delta = -0.005$), and Beauty is essentially unchanged ($\Delta = +0.001$). Per-category frozen validation for Complexity shows the strongest alignment in Banner ($\rho = 0.813$), followed by UI ($\rho = 0.661$), Packaging ($\rho = 0.646$), Painting ($\rho = 0.353$), and Poster ($\rho = 0.099$). The largest absolute errors occur for Order on UI images, where the model systematically underpredicts human ratings.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\linewidth]{fig_failure_case_panel.pdf}
+    \caption{Left: frozen predictions versus human mean ratings for all validated dimensions. Right: largest absolute errors, dominated by Order on UI images.}
+    \label{fig:failure_panel}
+\end{figure}

@@ -1,0 +1,18 @@
+{
+  "protocol": "6.0-corrected-second-renderer-mechanism-audit",
+  "run_id": "run_20260720_external_protocol_v6",
+  "rng_seed": 26072006,
+  "n_boot": 2000,
+  "n_restricted_null": 100,
+  "external_generator": "separately_implemented_internal_opencv_holdout_v1",
+  "force_regenerate": true,
+  "cache_binding_file": "cache_bindings.json",
+  "restricted_null_role": "not run and not used as a decision gate",
+  "bootstrap_p_values": false,
+  "bh_q_values": false,
+  "primary_target_scaling": "G-dev constants for Pillow; direct orthogonal levels for OpenCV",
+  "proxy_scaling": "protocol-v5 G-dev constants applied unchanged",
+  "saliency_algorithm": "in-repository spectral residual; no cv2.saliency dependency",
+  "scope": "two internally controlled renderers; failure analysis, not external natural-image validation",
+  "external_score_health": "feature maps are checked separately from final-score boundary collapse; raw and clipped composite associations are both released"
+}

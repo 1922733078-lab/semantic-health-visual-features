@@ -1,0 +1,120 @@
+\begin{table}[htbp]
+\centering
+\caption{Semantic-health repair on the primary G-test split. Retained weight is the fraction of absolute formula weight attached to nonconstant G-dev inputs. Intervals resample ten seeds as clusters.}
+\label{tab:semantic_repair}
+\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrr}
+\toprule
+Legacy composite & Pre retained & Post retained & Pre-fix $\rho$ & Post-fix $\rho$ & $\Delta\rho$ \\
+\midrule
+Complexity & 1.00 & 1.00 & 0.628 & 0.628 & 0.000 \\
+Order & 0.85 & 1.00 & 0.227 & 0.275 & 0.047 \\
+Harmony & 1.00 & 1.00 & -0.100 & -0.100 & 0.000 \\
+Intensity & 1.00 & 1.00 & 0.187 & 0.187 & 0.000 \\
+Hierarchy & 0.55 & 1.00 & 0.524 & 0.260 & -0.263 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Corrected G-test associations after G-dev-only target and feature scaling. All 25 associations are released; the table shows nominal pairs and the strongest non-target response.}
+\label{tab:primary_v5}
+\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrr}
+\toprule
+Composite & Target & $\rho$ & Seed-cluster 95\% CI & Max other $|\rho|$ & Margin \\
+\midrule
+Complexity & Structural clutter & 0.623 & [0.615, 0.630] & 0.667 & -0.044 \\
+Order & Geometric order & 0.275 & [0.256, 0.294] & 0.605 & -0.330 \\
+Harmony & Palette coherence & -0.098 & [-0.113, -0.081] & 0.065 & 0.033 \\
+Intensity & Visual salience & 0.187 & [0.167, 0.207] & 0.504 & -0.317 \\
+Hierarchy & Focal hierarchy & 0.260 & [0.227, 0.288] & 0.367 & -0.107 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Elementary baselines selected on G-dev and locked before paired G-test evaluation. $\Delta\rho=\rho_{composite}-\rho_{baseline}$.}
+\label{tab:baseline_v5}
+\footnotesize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrr}
+\toprule
+Composite & Locked baseline & Composite $\rho$ & Baseline $\rho$ & $\Delta\rho$ & Seed-cluster 95\% CI \\
+\midrule
+Complexity & Contour Density & 0.623 & 0.673 & -0.051 & [-0.059, -0.042] \\
+Order & Whitespace Ratio & 0.275 & 0.229 & 0.045 & [0.032, 0.057] \\
+Harmony & Negative Colourfulness & -0.098 & 0.193 & -0.290 & [-0.320, -0.261] \\
+Intensity & Luminance Spread & 0.187 & 0.324 & -0.137 & [-0.156, -0.120] \\
+Hierarchy & Edge Coverage & 0.260 & 0.750 & -0.490 & [-0.520, -0.465] \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Pixel-side ridge recoverability probes. Alpha was selected on G-validation; G-dev-constant features were removed; intervals resample ten seeds. These are scope diagnostics, not perceptual validation.}
+\label{tab:controls_v6}
+\footnotesize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrr}
+\toprule
+Target & Features & Pillow $\rho$ & Pillow 95\% CI & OpenCV $\rho$ & OpenCV 95\% CI \\
+\midrule
+Structural clutter & 38 & 0.667 & [0.655, 0.679] & 0.374 & [0.359, 0.387] \\
+Geometric order & 38 & 0.479 & [0.464, 0.494] & 0.514 & [0.501, 0.529] \\
+Palette coherence & 38 & 0.362 & [0.340, 0.386] & 0.102 & [0.039, 0.170] \\
+Visual salience & 38 & 0.718 & [0.713, 0.722] & 0.646 & [0.613, 0.685] \\
+Focal hierarchy & 38 & 0.855 & [0.849, 0.861] & 0.293 & [0.275, 0.314] \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Declared operational descriptors on the two controlled renderers. Each cell reports Spearman $\rho$ and its ten-seed cluster interval.}
+\label{tab:operational_v6}
+\footnotesize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrr}
+\toprule
+Descriptor & Nominal target & Pillow G-test & Internal OpenCV \\
+\midrule
+Canny edge fraction & Structural clutter & 0.663 [0.656, 0.671] & 0.468 [0.445, 0.491] \\ 
+Lab residual entropy & Structural clutter & 0.533 [0.520, 0.549] & 0.709 [0.667, 0.764] \\ 
+JPEG bytes/pixel & Structural clutter & 0.485 [0.469, 0.500] & 0.774 [0.739, 0.812] \\ 
+Colourfulness & Palette coherence & -0.184 [-0.211, -0.156] & 0.005 [-0.051, 0.061] \\ 
+Luminance CV & Visual salience & 0.265 [0.245, 0.287] & 0.856 [0.835, 0.889] \\ 
+Mirror similarity & Geometric order & 0.318 [0.292, 0.344] & 0.640 [0.610, 0.671] \\ 
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Corrected legacy composites on the pairwise-orthogonal internal OpenCV renderer ($n=1{,}250$, ten seeds). ``Undef.'' indicates a constant score vector for which Spearman $\rho$ is mathematically undefined.}
+\label{tab:external_v6}
+\footnotesize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrr}
+\toprule
+Composite & Final score $\rho$ [95\% CI] & Raw sum $\rho$ [95\% CI] & Final margin \\
+\midrule
+Complexity & Undef. (constant) & 0.895 [0.884, 0.904] & Undef. \\
+Order & 0.249 [0.229, 0.268] & 0.291 [0.280, 0.301] & $-0.418$ \\
+Harmony & 0.061 [$-0.132$, 0.221] & 0.061 [$-0.136$, 0.222] & $-0.217$ \\
+Intensity & Undef. (constant) & 0.674 [0.620, 0.730] & Undef. \\
+Hierarchy & 0.131 [0.099, 0.167] & 0.131 [0.098, 0.165] & $-0.315$ \\
+\bottomrule
+\end{tabular}
+}
+\end{table}

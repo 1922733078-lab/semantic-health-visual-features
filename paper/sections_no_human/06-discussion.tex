@@ -1,0 +1,37 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{What semantic health adds to reproducibility}
+
+The central result is not that one saliency algorithm is preferable to another. It is that a deterministic research object can preserve an inactive computation with high fidelity. The pre-fix matrix passed row-count, finite-value, schema, and hash checks. Only a semantic invariant---a weighted saliency feature should vary across diverse non-uniform images---made the defect visible. Retained weight then connected the field failure to formula semantics, and the saliency-only replacement connected it to held-out conclusions.
+
+The same logic exposed a second failure after the first was repaired. OpenCV saliency features varied normally, and the raw complexity and intensity sums strongly tracked their nominal factors. Nevertheless, the final scores were constant because the G-dev percentile map placed the entire second domain below zero before clipping. A feature-health gate alone would have passed; a score-distribution gate caught the collapse. Reproducible visual pipelines therefore need invariants at input, intermediate representation, composite, and exported-score layers.
+
+\subsection{Repair can invalidate a favourable result}
+
+Software repair is sometimes described as a route to improved performance. Here, hierarchy falls by 0.263 when the constant fallback is replaced. The old favourable association depended on the remaining 55\% of the formula, especially edge and projection terms; adding the intended saliency variation exposes their mismatch with the target. This is scientifically valuable because it prevents a nonfunctional component from receiving explanatory credit. The order gain is smaller and positive, showing that the direction of correction cannot be assumed.
+
+\subsection{Development discipline changes baseline claims}
+
+Selecting the strongest baseline on G-test had supported an ``all five lose'' narrative. Selecting on G-dev and locking before G-test leaves four losses but identifies a small order advantage. The correction does not rescue the order label: the composite correlates more strongly with structural clutter than geometric order. It does demonstrate why baseline selection is part of the model-development process and should not be hidden inside final evaluation. Rejecting sign-reversed rank duplicates is equally important for rank-based metrics; $s$ and $1-s$ are not two independent candidates.
+
+\subsection{Relation to contemporary complexity research}
+
+Modern complexity datasets and models combine local detail, global context, semantics, and human annotation \citep{feng2023ic9600,kyledavidson2023complexity,guo2026dual}. Our controlled engineering targets cover only a subset of low-level and layout mechanisms. The poor selectivity of several formulas and the cross-renderer mechanism reversals are therefore unsurprising and should not be read as evidence against perceptual complexity research. Instead, they show why an operational formula needs an identifiable use case, appropriate reference methods, and evidence at the level claimed.
+
+The present gates are compatible with learned systems. A deep embedding dimension need not vary individually, but a declared score, attention map, localisation head, or ablation pathway can still be assigned a semantic invariant. Examples include nonconstant response to a positive control, preservation of expected ranking under a controlled intervention, bounded clipping under a documented shift, and distinction from a supposedly different baseline. The invariant must be justified by the component's declared role, not chosen after observing final performance.
+
+\subsection{Limits}
+
+The empirical evidence is drawn from one project's pipeline with two internally controlled renderers using simple geometric primitives. Ten rendering seeds support cluster-sensitive intervals describing seed sensitivity, but not broad population inference or generalisation to natural images. The five formulas are historical case subjects without externally validated use cases; the spectral-residual map is a deterministic operational descriptor, not fixation ground truth. The G-dev/G-test split is confounded with rendering style, so baseline comparisons reflect both formula quality and style shift. Human studies remain necessary for any perceptual claim.
+
+The raw-versus-clipped OpenCV result creates a design choice that this paper does not resolve universally. Removing clipping, refitting bounds on the new domain, or using a monotone unbounded output would preserve rank signal, but each changes the score contract. We report the failure rather than retune on the held-out renderer. Future work should predeclare whether cross-domain comparability concerns absolute calibration, rank order, or both.
+
+\subsection{Relation to metamorphic and property-based testing}
+
+The semantic-health gates share the oracle-free philosophy of metamorphic testing \citep{guderlei2007statistical,lin2018metamorphic} but target a different failure layer. Classical metamorphic relations for image processing---rotation invariance of edge count, brightness-shift invariance of colour histograms---operate at the input--output level and would not detect a constant intermediate feature column unless the relation explicitly inspects intermediate representations. The responsiveness gate and retained-weight gate fill this gap by asserting properties of the feature matrix itself. The gates are also narrower than full property-based testing: they can reject an inactive computation but cannot prove semantic correctness. We therefore position them as a lightweight, CI-compatible complement to metamorphic testing, specifically designed for the weighted-formula pipelines common in visual-complexity and aesthetics research.
+
+\subsection{Practical implications}
+
+For a deterministic visual-feature release, we recommend five minimum checks: fail on missing optional dependencies; assert responsiveness for every nonzero-weight input on development controls; report retained formula weight; reject rank-equivalent baseline candidates before selection; and audit exported-score ties and boundary mass on every evaluation domain. These checks are inexpensive relative to feature extraction and can run in continuous integration. Hashes remain essential, but they should bind an artefact only after its semantic gates pass.
+

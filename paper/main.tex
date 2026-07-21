@@ -1,0 +1,63 @@
+\documentclass[preprint,12pt,authoryear]{elsarticle}
+
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{geometry}
+\geometry{a4paper,margin=1in}
+\newcommand{\degree}{$^\circ$}
+
+\graphicspath{{figures/}}
+\journal{Journal of Visual Communication and Image Representation}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{A Human-Light Interpretable Framework for Visual Complexity and Aesthetic Proxy Assessment in Art and Design Images}
+
+\author[addr1]{Ming Zhu}
+\author[addr2]{Zihang Xue}
+
+\address[addr1]{School of Art and Design, Henan University of Engineering, No.1 Xianghe Road, Longhu, Xinzheng, Zhengzhou, Henan 451191, China}
+\address[addr2]{Department of Light Engineering, Qilu University of Technology, No.3501 Daxue Road, Changqing District, Jinan, Shandong 250353, China}
+
+\begin{abstract}
+Human ratings of visual complexity and aesthetic quality are expensive and domain-specific, yet claims about perception cannot be validated solely by computational scores. We present a human-light, interpretable framework that uses a compact set of design-theory-grounded handcrafted features and classical regression to build perceptual proxies for art and design images. The study separates large-scale proxy development (17,337 images with computational targets) from a frozen external validation on 100 images rated by 30 human raters. The frozen model, selected without using the human validation set, achieves Spearman $\rho = 0.773$ for Complexity (95\% CI 0.663--0.851), $\rho = 0.724$ for Order (95\% CI 0.611--0.808), $\rho = 0.565$ for Beauty (95\% CI 0.395--0.697), and $\rho = 0.408$ for Emotion (95\% CI 0.208--0.581); all confidence intervals exclude zero after false-discovery-rate correction. Rater- and image-saturation analyses show that 10--20 raters and 80--100 images can yield stable validation conclusions in this task. The model is highly efficient (0.07\,ms per image, 7.7\,KB) and interpretable through standardized Ridge coefficients. Hierarchy, however, is not reliably captured (ICC(2,1) = 0.025) and is reported as exploratory. The framework reduces, but does not eliminate, the need for human evaluation.
+\end{abstract}
+
+\begin{keyword}
+Visual Complexity \sep Aesthetic Perception \sep Interpretable Machine Learning \sep Human-Light Evaluation \sep Visual Design Features \sep Art and Design Images
+\end{keyword}
+
+\end{frontmatter}
+
+\input{sections/01-introduction}
+\input{sections/02-related_work}
+\input{sections/03-method}
+\input{sections/04-experiments}
+\input{sections/05-results}
+\input{sections/06-discussion}
+\input{sections/07-conclusion}
+
+\section*{Acknowledgments}
+% TODO: add funding acknowledgement and any other acknowledgments.
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+\section*{Author contributions}
+% TODO: confirm and complete author contribution statement.
+M.Z.~designed the study and collected the human-rating data. Z.X.~developed the computational framework, implemented the redesign pipeline, and performed the statistical analyses. Both authors contributed to writing and revising the manuscript.
+
+\section*{AI use disclosure}
+During the preparation of this work, the authors used AI-assisted coding and writing tools to develop analysis scripts and refine the manuscript. All scientific conclusions, final text, and decisions were reviewed and approved by the authors.
+
+\bibliographystyle{elsarticle-harv}
+\bibliography{references}
+
+\end{document}

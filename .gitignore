@@ -1,0 +1,55 @@
+# Large data (re-downloadable or too large for GitHub)
+data/raw/
+data/processed/
+data/features/
+models/downloaded/
+
+# Virtual environment
+venv/
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.spl
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Large result archives (keep only v5/v6 runs)
+results/no_human/tier_b_release/
+results/no_human/submission_package/
+results/no_human/archive/
+results/redesign/
+
+# Notebooks (exploratory, not part of paper)
+notebooks/
+
+# Subjective experiment (historical, not active)
+subjective_experiment/
+盲评问卷/
+
+# Misc scripts (exploratory)
+*.mp4

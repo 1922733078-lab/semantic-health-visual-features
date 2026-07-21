@@ -1,0 +1,41 @@
+{
+  "protocol": "5.0-semantic-health-failure-analysis",
+  "run_id": "run_20260720_semantic_health_v5",
+  "rng_seed": 260720,
+  "n_cluster_bootstrap": 2000,
+  "primary_evaluation_split": "G-test",
+  "target_scaler_fit_split": "G-dev",
+  "feature_scaler_fit_split": "G-dev",
+  "baseline_selection_split": "G-dev",
+  "baseline_evaluation_split": "G-test",
+  "saliency_algorithm": "spectral residual; Hou and Zhang 2007; DOI 10.1109/CVPR.2007.383267",
+  "pre_post_causal_comparison": "only saliency-derived columns replaced; full repaired pipeline reported separately",
+  "saliency_repair_columns": [
+    "rule_of_thirds",
+    "center_offset_x",
+    "center_offset_y",
+    "fg_bg_ratio",
+    "saliency_mean",
+    "saliency_std",
+    "num_salient_regions",
+    "saliency_entropy",
+    "num_saliency_peaks",
+    "saliency_coverage"
+  ],
+  "composite_role": "legacy software artefacts under audit; not validated perceptual scales",
+  "runtime": {
+    "python": "3.11.15",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "numpy": "2.4.6",
+    "pandas": "3.0.3",
+    "scipy": "1.17.1",
+    "scikit_image": "0.26.0",
+    "opencv": "5.0.0",
+    "matplotlib": "3.11.0"
+  },
+  "inputs": {
+    "results/no_human/runs/run_20260720_semantic_health_v5/pre_fix_synthetic_traditional_features.csv": "8ea5d19b7b39a8033b7036b179608ae6fac8ef30f296fde9d873c245811f0304",
+    "synthetic_benchmark/metadata/synthetic_traditional_features.csv": "b1bcbc59becce6f4bb06d9ebe0e67587c846de1f5504e34946b95ab333a9e15b",
+    "synthetic_benchmark/metadata/target_metadata.csv": "2cb8ef9fb84a8103d4d75161b10a23aa877f8c7b1da9b288915041e28513029e"
+  }
+}

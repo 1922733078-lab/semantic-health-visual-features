@@ -1,0 +1,6 @@
+,structural_clutter_index,geometric_order_index,palette_coherence_index,visual_salience_index,focal_hierarchy_index
+structural_clutter_index,1.0,0.0,0.0,0.0,0.0
+geometric_order_index,0.0,1.0,0.0,0.0,0.0
+palette_coherence_index,0.0,0.0,1.0,0.0,0.0
+visual_salience_index,0.0,0.0,0.0,1.0,0.0
+focal_hierarchy_index,0.0,0.0,0.0,0.0,1.0

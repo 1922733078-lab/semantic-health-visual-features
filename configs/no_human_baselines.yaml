@@ -1,0 +1,78 @@
+# Baseline configuration for no-human comparative evaluation
+# All baselines are deterministic and computed from image descriptors.
+
+baselines:
+  visual_complexity_proxy:
+    - name: baseline_complexity_gray_entropy
+      description: Grayscale intensity entropy
+      source: scikit-image / scipy.stats.entropy
+      direction: positive
+    - name: baseline_complexity_edge_density
+      description: Canny edge density
+      source: OpenCV Canny
+      direction: positive
+    - name: baseline_complexity_contour_density
+      description: Edge density adjusted by non-whitespace area
+      source: derived from edge_density and whitespace_ratio
+      direction: positive
+
+  layout_order_proxy:
+    - name: baseline_order_spacing_cv
+      description: Local contrast CV as spacing irregularity proxy
+      source: derived from 64x64 block standard deviations
+      direction: negative
+    - name: baseline_order_symmetry
+      description: Horizontal symmetry score
+      source: scikit-image SSIM
+      direction: positive
+
+  colour_harmony_proxy:
+    - name: baseline_harmony_hue_entropy
+      description: 3D HSV colour entropy
+      source: numpy histogramdd + scipy.stats.entropy
+      direction: negative
+    - name: baseline_harmony_palette_size
+      description: Number of dominant colours (k-means > 5% mass)
+      source: OpenCV kmeans
+      direction: negative
+    - name: baseline_harmony_colourfulness
+      description: Saturation-based colourfulness
+      source: derived from saturation_mean and saturation_std
+      direction: negative
+
+  visual_intensity_proxy:
+    - name: baseline_intensity_rms_contrast
+      description: RMS contrast in L* channel
+      source: OpenCV BGR->Lab
+      direction: positive
+    - name: baseline_intensity_luminance_range
+      description: Standard deviation of V channel
+      source: OpenCV BGR->HSV
+      direction: positive
+    - name: baseline_intensity_saturation
+      description: Mean saturation
+      source: OpenCV BGR->HSV
+      direction: positive
+
+  layout_hierarchy_proxy:
+    - name: baseline_hierarchy_saliency_std
+      description: Standard deviation of spectral-residual saliency map
+      source: In-repository Hou-Zhang spectral-residual implementation
+      direction: positive
+    - name: baseline_hierarchy_area_concentration
+      description: Foreground/background area ratio
+      source: Mean threshold of spectral-residual saliency map
+      direction: positive
+    - name: baseline_hierarchy_edge_coverage
+      description: Canny edge coverage (not a text detector)
+      source: OpenCV Canny
+      direction: positive
+
+settings:
+  selection_split: G-dev
+  evaluation_split: G-test
+  selection_rule: maximum direction-adjusted Spearman rho on G-dev; lexical tie break
+  duplicate_rank_candidates_removed: true
+  n_weight_perturbations: 1000
+  perturbation_range: [0.9, 1.1]
+  random_seed: 42

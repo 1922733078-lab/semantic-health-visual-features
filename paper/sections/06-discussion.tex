@@ -1,0 +1,24 @@
+% sections/06-discussion.tex
+
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Separating Proxy Performance from Human Alignment}
+
+The proxy-task $R^2$ values in Table~\ref{tab:proxy_cv} are intentionally high: the targets are deterministic functions of visual features, so a linear model with the right features can reconstruct them. These values support the engineering claim that the features are sufficient for the defined proxy task; they do not, by themselves, prove human-perception prediction. The defensible human-alignment evidence comes from the frozen external validation in Table~\ref{tab:frozen_human}, where the same model is applied once to independent human ratings. The drop from proxy $R^2$ to human $\rho$ is expected and must be reported transparently.
+
+\subsection{What the Human Alignment Tells Us}
+
+Complexity and Order achieve the strongest frozen alignment with human judgments. This suggests that the 30 core features---color counts, contrast, edge density, symmetry, whitespace---capture a meaningful portion of how humans perceive visual complexity and structural organization. Beauty and Emotion show weaker but still positive alignment. The standardized coefficients (Table~\ref{tab:top_features}) indicate that warmth, saturation variation, and color entropy are associated with higher beauty proxy scores, while saturation mean dominates emotion proxy scores. These patterns are associative, not causal; they identify candidate visual factors for follow-up experiments rather than proven levers of human preference.
+
+\subsection{Label Efficiency}
+
+The saturation analyses directly quantify the cost of future validation. For Complexity and Emotion, 10 raters are sufficient under the predeclared criterion; Beauty requires 15, and Order requires 20. Hierarchy requires more raters than were available. For images, 80 stratified items yield stable conclusions for Complexity, Beauty, and Order, while Emotion remains more variable and would benefit from the full 100. These estimates are specific to this task, population, and image domain and should not be generalized without further study.
+
+\subsection{Limitations}
+
+Several limitations must be acknowledged. \textbf{(1) Hierarchy:} human ratings of hierarchy are unreliable (ICC(2,1) = 0.025), and the proxy does not claim to assess this dimension. \textbf{(2) Domain coverage:} the Phase~1 dataset is dominated by paintings and UI screenshots; packaging, poster, and banner categories are underrepresented. \textbf{(3) Deep-feature coverage:} deep representations and the 44 enhanced features are available only for a subset of images, so a fair human-level baseline on all 100 validation images could not be computed. \textbf{(4) Population:} raters were recruited through a convenience sample and results may not generalize across cultures or expertise levels. \textbf{(5) Causal claims:} feature coefficients show association, not causation.
+
+\subsection{Practical Implications}
+
+The framework is best understood as a screening or decision-support tool. Practitioners can obtain fast, interpretable proxy scores for Complexity, Order, Beauty, and Emotion without human raters, then allocate limited human-evaluation resources to the most critical cases. The small-sample calibration experiment shows little gain, suggesting that the frozen proxy is already close to the information available in a few dozen human ratings for this task.

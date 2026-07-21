@@ -1,0 +1,6 @@
+proxy,target,baseline,source_feature,direction,selected_on,evaluated_on,n_images,n_seed_clusters,proposed_rho,baseline_rho,delta_rho,cluster_delta_ci_lower,cluster_delta_ci_upper
+visual_complexity_proxy,structural_clutter_index,contour_density,contour_density,1.0,G-dev only,G-test only,6250,10,0.6227286605078857,0.6734004236041101,-0.050671763096224454,-0.05851483242227752,-0.042396585549714656
+layout_order_proxy,geometric_order_index,whitespace_ratio,whitespace_ratio,1.0,G-dev only,G-test only,6250,10,0.27454417116065943,0.2291018945641917,0.04544227659646774,0.031746384632100354,0.05672021717908616
+colour_harmony_proxy,palette_coherence_index,negative_colourfulness,colourfulness,-1.0,G-dev only,G-test only,6250,10,-0.09766996518828833,0.19274637299851793,-0.29041633818680623,-0.320329377661672,-0.26118898164691096
+visual_intensity_proxy,visual_salience_index,luminance_spread,value_std,1.0,G-dev only,G-test only,6250,10,0.1870563598617441,0.3238164637900577,-0.1367601039283136,-0.15601162729371268,-0.1196808966070055
+layout_hierarchy_proxy,focal_hierarchy_index,edge_coverage,edge_density,1.0,G-dev only,G-test only,6250,10,0.26032112619450437,0.7500560537487173,-0.48973492755421294,-0.5197600714104199,-0.4651675067800095

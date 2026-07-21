@@ -1,0 +1,26 @@
+proxy,target,n_images,n_seed_clusters,rho,cluster_ci_lower,cluster_ci_upper,is_nominal_target,target_scaling,feature_scaling
+visual_complexity_proxy,structural_clutter_index,6250,10,0.6227286605078857,0.6145993686454123,0.6302890342733289,True,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+visual_complexity_proxy,geometric_order_index,6250,10,-0.0857383955811192,-0.10025557051858083,-0.06898734537819598,False,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+visual_complexity_proxy,palette_coherence_index,6250,10,0.0951627325264608,0.08373244037905103,0.1072523478494335,False,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+visual_complexity_proxy,visual_salience_index,6250,10,0.4364651339900555,0.4257756647701947,0.44682328701771956,False,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+visual_complexity_proxy,focal_hierarchy_index,6250,10,0.6670000493563789,0.6567999219827475,0.6775078530708443,False,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+layout_order_proxy,structural_clutter_index,6250,10,-0.6048085974623238,-0.6165123548353078,-0.5935341719839491,False,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+layout_order_proxy,geometric_order_index,6250,10,0.27454417116065943,0.25551649309256474,0.2944847443567338,True,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+layout_order_proxy,palette_coherence_index,6250,10,-0.1830583306639001,-0.2115578506664561,-0.15541265026924322,False,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+layout_order_proxy,visual_salience_index,6250,10,-0.3563438237272568,-0.37009213398165797,-0.3429493475201015,False,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+layout_order_proxy,focal_hierarchy_index,6250,10,-0.5489990020121854,-0.5625243366155774,-0.5362543602205659,False,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+colour_harmony_proxy,structural_clutter_index,6250,10,-0.061645732989643674,-0.07744356890206844,-0.04420469233565886,False,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+colour_harmony_proxy,geometric_order_index,6250,10,0.027267746978600193,0.009694989851560105,0.04638770103946768,False,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+colour_harmony_proxy,palette_coherence_index,6250,10,-0.09766996518828833,-0.11270675931944009,-0.08142006152485852,True,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+colour_harmony_proxy,visual_salience_index,6250,10,-0.06456408094645465,-0.08692408994352283,-0.04441461045405212,False,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+colour_harmony_proxy,focal_hierarchy_index,6250,10,-0.057113422310420575,-0.07738810139369007,-0.0345566258003018,False,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+visual_intensity_proxy,structural_clutter_index,6250,10,0.49134471343141684,0.4808420167055874,0.502247254634378,False,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+visual_intensity_proxy,geometric_order_index,6250,10,-0.06530684986903064,-0.09029420273136178,-0.03914724448100879,False,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+visual_intensity_proxy,palette_coherence_index,6250,10,-0.10170425356192864,-0.12661597020022164,-0.07607375721910725,False,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+visual_intensity_proxy,visual_salience_index,6250,10,0.1870563598617441,0.16706917437413335,0.20696104817349878,True,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+visual_intensity_proxy,focal_hierarchy_index,6250,10,0.5039887377074038,0.48981213189233425,0.5166974852682857,False,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+layout_hierarchy_proxy,structural_clutter_index,6250,10,0.3670702984571597,0.3470458748952528,0.3839385344624575,False,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+layout_hierarchy_proxy,geometric_order_index,6250,10,-0.27131698580415675,-0.291776950892913,-0.24929146270509275,False,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+layout_hierarchy_proxy,palette_coherence_index,6250,10,0.09333979868038621,0.07076852233484905,0.11605266366562576,False,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+layout_hierarchy_proxy,visual_salience_index,6250,10,0.11448481937349476,0.09191369443344571,0.13367311910695842,False,G-dev mean/std frozen,G-dev mean/std and score bounds frozen
+layout_hierarchy_proxy,focal_hierarchy_index,6250,10,0.26032112619450437,0.2267309126926637,0.2879271769226088,True,G-dev mean/std frozen,G-dev mean/std and score bounds frozen

@@ -1,0 +1,28 @@
+% sections/02-related_work.tex
+
+\section{Related Work}
+\label{sec:related}
+
+\subsection{Computational Aesthetics}
+\label{sec:rw_aesthetics}
+
+The computational study of aesthetics dates back to Birkhoff's \citep{birkhoff1933aesthetic} early proposal of an aesthetic measure defined as the ratio of order to complexity. In the modern era, \citet{damasio2022visual} provide a comprehensive survey of computational aesthetics, categorizing approaches into three paradigms: feature-based, deep learning-based, and hybrid methods. Feature-based approaches rely on handcrafted visual descriptors---color histograms \citep{freuder2001color}, edge orientations \citep{iyer2012detecting}, and compositional rules \citep{mavridaki2015composit}---extracted from image pixels and combined with classical machine learning classifiers.
+
+Deep learning approaches have achieved state-of-the-art results on large-scale datasets. \citet{murray2012ava} introduced the AVA dataset with over 250,000 images and paired aesthetic annotations, enabling the training of convolutional neural networks for aesthetic quality regression. Subsequent works \citep{jin2020aesthetic, zhu2022meta} employed attention mechanisms and multi-task learning to capture both global composition and local detail. However, these models typically require GPU-based training and offer limited interpretability regarding which visual properties drive their predictions.
+
+\subsection{Visual Complexity Assessment}
+\label{sec:rw_complexity}
+
+Visual complexity has been studied across psychology, design, and computer science. \citet{berlyne1971aesthetics} established the foundational inverted-U theory relating complexity to aesthetic preference, while \citet{nadal2010exploring}temporal dynamics of complexity perception. From a computational perspective, complexity has been estimated using information-theoretic measures (JPEG compression rate, Fourier spectrum slope) \citep{forsythe2011predicting}, edge density and feature congestion metrics \citep{rosenholtz2007measuring}, and more recently, deep feature diversity measures \citep{perez2022deep}.
+
+\subsection{Interpretable Visual Analysis}
+\label{sec:rw_interpretable}
+
+The demand for interpretability in visual content analysis has grown alongside the adoption of machine learning. \citet{wang2021towards} applied LIME and Gradient-weighted Class Activation Mapping (Grad-CAM) to explain aesthetic prediction models. \citet{li2023interpretable} introduced SHAP-based analysis to reveal feature contributions in image quality assessment. However, most interpretable approaches explain black-box deep learning models rather than using inherently interpretable feature representations, leaving a gap in understanding how fundamental visual design principles (color harmony, symmetry, contrast) quantitatively relate to aesthetic perception.
+
+Cross-domain studies bridging art and machine learning have gained increasing attention. \citet{eltem2023art} explore computational analysis of paintings using style-aware features, while \citet{castellano2022computational} examine the relationship between computational metrics and art-historical categories. These studies confirm that art and design images require domain-specific feature engineering rather than direct application of models trained on natural photographs.
+
+\subsection{Positioning of Our Work}
+\label{sec:rw_positioning}
+
+Our work differs from prior art in three key aspects. (1) We focus specifically on art and design images, where intentional compositional and color choices make design-theory-grounded features particularly relevant. (2) We maintain full interpretability by using classical machine learning models with SHAP attribution, rather than explaining opaque deep networks post-hoc. (3) We conduct systematic comparison between traditional design features and pre-trained deep representations across multiple perceptual dimensions, providing evidence for when lightweight approaches suffice and when deep features offer advantages.

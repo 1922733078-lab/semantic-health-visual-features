@@ -1,0 +1,59 @@
+# No-human-evaluation redesign configuration
+# All paths are relative to the project root (visual_complexity_paper/).
+
+no_human_evaluation: true
+project:
+  name: "Interpretable visual-complexity and layout-order proxy measurement"
+  version: "1.0"
+  date: "2026-07-13"
+  seed: 42
+
+paths:
+  image_manifest: "data/processed/no_human_image_manifest.csv"
+  metadata: "data/processed/no_human_image_manifest.csv"
+  traditional_features: "data/features/traditional_features.csv"
+  enhanced_features: "data/features/enhanced_features.csv"
+  deep_features_dir: "data/features/deep"
+  output_root: "results/no_human"
+  manifests: "results/no_human/manifests"
+  quality_control: "results/no_human/quality_control"
+  tables: "results/no_human/tables"
+  figures: "results/no_human/figures"
+  data: "results/no_human/data"
+  logs: "results/no_human/logs"
+
+# Primary constructs and their feature groups
+constructs:
+  visual_complexity_proxy:
+    groups: ["colour", "edge_texture", "composition", "text_layout"]
+    range: [0, 100]
+  layout_order_proxy:
+    groups: ["symmetry_alignment", "whitespace", "regularity"]
+    range: [0, 100]
+  colour_harmony_proxy:
+    groups: ["colour"]
+    range: [0, 100]
+  visual_intensity_proxy:
+    groups: ["colour", "edge_texture"]
+    range: [0, 100]
+  layout_hierarchy_proxy:
+    groups: ["text_layout", "saliency"]
+    range: [0, 100]
+
+# Stability transformations (benign)
+stability_transforms:
+  jpeg_compression:
+    quality: [90, 75]
+  brightness_shift:
+    factor: [0.95, 1.05]
+  contrast_shift:
+    factor: [0.95, 1.05]
+  resize:
+    scale: [0.95, 1.05]
+  gaussian_noise:
+    std: [0.005, 0.01]
+
+# Independent reference families
+independent_references:
+  - "deep_embedding_distance"
+  - "segmentation_geometry"

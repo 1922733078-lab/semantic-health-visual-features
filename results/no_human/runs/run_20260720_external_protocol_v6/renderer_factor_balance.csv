@@ -1,0 +1,3 @@
+renderer,n_images,n_seed_clusters,max_abs_off_diagonal_target_rho,interpretation
+Pillow_G-test,6250,10,0.7829552756937896,factor-balance diagnostic only; does not establish natural-image generalization
+internal_OpenCV,1250,10,0.0,factor-balance diagnostic only; does not establish natural-image generalization

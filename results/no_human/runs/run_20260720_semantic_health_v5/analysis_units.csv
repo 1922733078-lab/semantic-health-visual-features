@@ -1,0 +1,7 @@
+split,family,n_images,n_seed_clusters,min_seed,max_seed
+G-dev,A_poster,6250,10,0,9
+G-test,C_card,6250,10,15,24
+G-validation,B_banner,3125,5,10,14
+interaction-test,A_poster,320,10,0,9
+interaction-test,B_banner,160,5,10,14
+interaction-test,C_card,320,10,15,24

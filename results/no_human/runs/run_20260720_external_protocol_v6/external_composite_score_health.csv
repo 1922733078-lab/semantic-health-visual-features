@@ -1,0 +1,6 @@
+proxy,n,finite,n_unique,sample_std,largest_exact_tie_fraction,lower_boundary_fraction,upper_boundary_fraction,below_zero_before_final_clip_fraction,above_100_before_final_clip_fraction,passed_non_degenerate_final_score
+visual_complexity_proxy,1250,True,1,0.0,1.0,1.0,0.0,1.0,0.0,False
+layout_order_proxy,1250,True,325,5.229967491330922,0.7408,0.0,0.7408,0.0,0.7408,True
+colour_harmony_proxy,1250,True,1135,15.6929741688123,0.028,0.0,0.0,0.0,0.0,True
+visual_intensity_proxy,1250,True,1,0.0,1.0,1.0,0.0,1.0,0.0,False
+layout_hierarchy_proxy,1250,True,1250,14.722138917087472,0.0008,0.0,0.0,0.0,0.0,True

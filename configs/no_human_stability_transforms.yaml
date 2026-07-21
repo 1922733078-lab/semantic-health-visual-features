@@ -1,0 +1,71 @@
+# No-human-evaluation benign stability transformations
+# Version: 1.0
+# Date: 2026-07-13
+
+seed: 42
+reference_role: "D_stability"
+reference_split: "stability"
+
+# Each transformation has a name, type, and one or more severity levels.
+# All transformations preserve the layout structure of the image.
+transformations:
+  jpeg_compression:
+    type: "compression"
+    description: "JPEG re-encoding with different quality levels"
+    params:
+      - level_id: "q90"
+        quality: 90
+      - level_id: "q75"
+        quality: 75
+
+  brightness_shift:
+    type: "colour"
+    description: "Linear scaling of the V channel in HSV space"
+    params:
+      - level_id: "down5"
+        factor: 0.95
+      - level_id: "up5"
+        factor: 1.05
+
+  contrast_shift:
+    type: "colour"
+    description: "Linear scaling of pixel values around the image mean"
+    params:
+      - level_id: "down5"
+        factor: 0.95
+      - level_id: "up5"
+        factor: 1.05
+
+  resize:
+    type: "geometry"
+    description: "Downscale and upscale back to 512x512 using linear interpolation"
+    params:
+      - level_id: "down5"
+        scale: 0.95
+      - level_id: "up5"
+        scale: 1.05
+
+  gaussian_noise:
+    type: "noise"
+    description: "Additive Gaussian noise in [0,255] intensity units"
+    params:
+      - level_id: "std0.005"
+        std: 0.005
+      - level_id: "std0.01"
+        std: 0.01
+
+# Stability evaluation policy
+stability_policy:
+  score_range: [0, 100]
+  metrics:
+    - visual_complexity_proxy
+    - layout_order_proxy
+    - colour_harmony_proxy
+    - visual_intensity_proxy
+    - layout_hierarchy_proxy
+  statistics:
+    - mean_absolute_difference
+    - median_absolute_difference
+    - rank_correlation_spearman
+    - within_5_percent_rate
+    - within_10_percent_rate
